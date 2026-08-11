@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hatcat33.github.io/2026/08/10/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://hatcat33.github.io/2026/08/11/New-Post/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -12,6 +12,15 @@
   
   <url>
     <loc>https://hatcat33.github.io/2026/08/10/zzz/</loc>
+    
+    <lastmod>2026-08-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hatcat33.github.io/2026/08/10/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -90,14 +99,21 @@
   </url>
   
   <url>
-    <loc>https://hatcat33.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://hatcat33.github.io/tags/RAG/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hatcat33.github.io/tags/YOLO/</loc>
+    <loc>https://hatcat33.github.io/tags/%E5%BE%AE%E8%B0%83/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hatcat33.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -106,7 +122,21 @@
 
   
   <url>
-    <loc>https://hatcat33.github.io/categories/acmfsdf/</loc>
+    <loc>https://hatcat33.github.io/categories/%E7%82%B9%E4%BA%91/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hatcat33.github.io/categories/Agent/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hatcat33.github.io/categories/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

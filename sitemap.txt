@@ -1,5 +1,6 @@
-https://hatcat33.github.io/2026/08/10/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/
+https://hatcat33.github.io/2026/08/11/New-Post/
 https://hatcat33.github.io/2026/08/10/zzz/
+https://hatcat33.github.io/2026/08/10/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/
 https://hatcat33.github.io/2026/08/10/hello-world/
 https://hatcat33.github.io/repository/index.html
 https://hatcat33.github.io/categories/index.html
@@ -8,6 +9,9 @@ https://hatcat33.github.io/projects/index.html
 https://hatcat33.github.io/about/index.html
 https://hatcat33.github.io/
 https://hatcat33.github.io/tags/sfsfs/
+https://hatcat33.github.io/tags/RAG/
+https://hatcat33.github.io/tags/%E5%BE%AE%E8%B0%83/
 https://hatcat33.github.io/tags/%E7%AE%97%E6%B3%95/
-https://hatcat33.github.io/tags/YOLO/
-https://hatcat33.github.io/categories/acmfsdf/
+https://hatcat33.github.io/categories/%E7%82%B9%E4%BA%91/
+https://hatcat33.github.io/categories/Agent/
+https://hatcat33.github.io/categories/%E7%AE%97%E6%B3%95%E9%A2%98/
