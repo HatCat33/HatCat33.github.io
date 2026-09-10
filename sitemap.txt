@@ -1,3 +1,4 @@
+https://hatcat33.github.io/2026/09/10/26%E8%A5%BF%E7%94%B5%E7%A7%8B%E6%8B%9B/
 https://hatcat33.github.io/2026/08/29/%E4%B8%80%E6%96%87%E6%95%99%E4%BD%A0%E8%AF%BB%E6%87%82-RAG-%E5%85%A8%E9%93%BE%E8%B7%AF%E4%BB%A5%E5%8F%8A%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/
 https://hatcat33.github.io/2026/08/11/RAG%E3%80%81%E5%BE%AE%E8%B0%83%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93/
 https://hatcat33.github.io/2026/08/18/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B-Round-157-%E9%A2%98%E8%A7%A3/
@@ -11,10 +12,10 @@ https://hatcat33.github.io/tags/index.html
 https://hatcat33.github.io/projects/index.html
 https://hatcat33.github.io/about/index.html
 https://hatcat33.github.io/
+https://hatcat33.github.io/tags/%E8%A5%BF%E7%94%B5%E6%A0%A1%E6%8B%9B/
 https://hatcat33.github.io/tags/RAG/
 https://hatcat33.github.io/tags/%E5%BE%AE%E8%B0%83/
 https://hatcat33.github.io/tags/Agent/
-https://hatcat33.github.io/tags/%E5%AE%9E%E4%B9%A0/
 https://hatcat33.github.io/tags/%E7%89%9B%E5%AE%A2/
 https://hatcat33.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/
 https://hatcat33.github.io/tags/%E6%A8%A1%E6%8B%9F/
@@ -23,10 +24,12 @@ https://hatcat33.github.io/tags/%E4%BA%8C%E5%88%86/
 https://hatcat33.github.io/tags/%E6%95%B0%E5%AD%A6/
 https://hatcat33.github.io/tags/dfs/
 https://hatcat33.github.io/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/
+https://hatcat33.github.io/tags/%E5%AE%9E%E4%B9%A0/
 https://hatcat33.github.io/tags/%E5%93%88%E5%B8%8C/
 https://hatcat33.github.io/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/
 https://hatcat33.github.io/tags/%E5%B7%AE%E5%88%86/
 https://hatcat33.github.io/tags/%E8%AE%A1%E6%95%B0/
+https://hatcat33.github.io/categories/%E9%97%B2%E8%B0%88/
 https://hatcat33.github.io/categories/Agent-RAG-%E5%BE%AE%E8%B0%83/
-https://hatcat33.github.io/categories/%E5%AE%9E%E4%B9%A0/
 https://hatcat33.github.io/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/
+https://hatcat33.github.io/categories/%E5%AE%9E%E4%B9%A0/
