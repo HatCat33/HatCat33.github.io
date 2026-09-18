@@ -7,19 +7,19 @@
 <meta name="theme-color" content="#f7f3e9" data-flatpaper-theme-color>
 
 <title>RAG、微调与智能体选型 | HatCat33_Blog</title>
-<meta name="description" content="本篇内容主要是弄清以下几个问题： 知道RAG、微调、智能体是什么以及它们分别都在解决什么问题 什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent 参考文档和资源如下：工具导航与参考资料索引、百度 一、判定问题根因在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不好...">
+<meta name="description" content="本篇内容主要是弄清以下几个问题： 知道RAG、微调、智能体是什么以及它们分别都在解决什么问题 什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent 参考文档和资源如下：工具导航与参考资料索引、百度 一、判定问题根因 在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RAG、微调与智能体选型 | HatCat33_Blog">
 <meta property="og:url" content="https://hatcat33.github.io/2026/08/11/RAG%E3%80%81%E5%BE%AE%E8%B0%83%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93/">
 <meta property="og:site_name" content="HatCat33_Blog">
-<meta property="og:description" content="本篇内容主要是弄清以下几个问题： 知道RAG、微调、智能体是什么以及它们分别都在解决什么问题 什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent 参考文档和资源如下：工具导航与参考资料索引、百度 一、判定问题根因在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不好...">
+<meta property="og:description" content="本篇内容主要是弄清以下几个问题： 知道RAG、微调、智能体是什么以及它们分别都在解决什么问题 什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent 参考文档和资源如下：工具导航与参考资料索引、百度 一、判定问题根因 在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不...">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hatcat33.github.io/images/agent/image1.png">
 <meta property="og:image" content="https://hatcat33.github.io/images/agent/image2.png">
 <meta property="og:image" content="https://hatcat33.github.io/images/agent/image3.png">
 <meta property="article:published_time" content="2026-08-11T07:14:27.000Z">
-<meta property="article:modified_time" content="2026-08-29T14:56:48.000Z">
-<meta property="article:author" content="HatCat33">
+<meta property="article:modified_time" content="2026-09-13T04:12:41.000Z">
+<meta property="article:author" content="cv视觉组最憨的牛马">
 <meta property="article:tag" content="Agent">
 <meta property="article:tag" content="RAG">
 <meta property="article:tag" content="微调">
@@ -29,7 +29,8 @@
 
 <link rel="icon" href="/images/favicon.png" type="image/png">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"RAG、微调与智能体选型","name":"RAG、微调与智能体选型 | HatCat33_Blog","description":"本篇内容主要是弄清以下几个问题： 知道RAG、微调、智能体是什么以及它们分别都在解决什么问题 什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent 参考文档和资源如下：工具导航与参考资料索引、百度 一、判定问题根因在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不好...","url":"https://hatcat33.github.io/2026/08/11/RAG%E3%80%81%E5%BE%AE%E8%B0%83%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/08/11/RAG%E3%80%81%E5%BE%AE%E8%B0%83%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93/","datePublished":"2026-08-11T07:14:27.000Z","dateModified":"2026-08-29T14:56:48.000Z","author":{"@type":"Person","name":"HatCat33"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"RAG, 微调, Agent"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"RAG、微调与智能体选型","name":"RAG、微调与智能体选型 | HatCat33_Blog","description":"本篇内容主要是弄清以下几个问题： 知道RAG、微调、智能体是什么以及它们分别都在解决什么问题 什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent 参考文档和资源如下：工具导航与参考资料索引、百度 一、判定问题根因 在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不...","url":"https://hatcat33.github.io/2026/08/11/RAG%E3%80%81%E5%BE%AE%E8%B0%83%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/08/11/RAG%E3%80%81%E5%BE%AE%E8%B0%83%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93/","datePublished":"2026-08-11T07:14:27.000Z","dateModified":"2026-09-13T04:12:41.000Z","author":{"@type":"Person","name":"cv视觉组最憨的牛马"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"RAG, 微调, Agent"}</script>
+
 
 <script>
   (function () {
@@ -47,10 +48,32 @@
       }
     } catch (e) {}
   })();
+
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true
+  },
+  startup: {
+    typeset: false, // 关闭自动渲染，等DOM就绪再手动触发
+    pageReady: function() {
+      return MathJax.startup.defaultPageReady().then(function(){
+        console.log("MathJax loaded, trigger typeset");
+        // 手动扫描页面全部公式
+        return MathJax.typesetPromise();
+      })
+    }
+  }
+};
+</script>
+<!-- 把async去掉！async会导致时序错乱，改成普通script -->
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
-<link rel="stylesheet" href="/css/style.css">
 
+<link rel="stylesheet" href="/css/style.css">
 
 
 
@@ -254,12 +277,12 @@
   <section class="side-card profile-card">
     
       <div class="avatar avatar--image">
-        <img src="/images/profile.jpg" alt="HatCat33" loading="lazy" referrerpolicy="no-referrer">
+        <img src="/images/profile.jpg" alt="cv视觉组最憨的牛马" loading="lazy" referrerpolicy="no-referrer">
       </div>
     
-    <h3>HatCat33</h3>
+    <h3>cv视觉组最憨的牛马</h3>
     <p class="profile-role">日常记录</p>
-    <p>目前西电计科在读硕士一枚，专注于研究点云方向，以及 AI Agent应用开发学习中......</p>
+    <p>目前西电计科在读硕士一枚，专注于研究点云方向（某越视觉组），以及 AI Agent应用开发学习中......</p>
     
     <div class="socials">
       
@@ -331,11 +354,11 @@ Table of contents</h2>
   
   <header class="article-header">
     
-      <a class="label-pill" href="/categories/Agent-RAG-%E5%BE%AE%E8%B0%83/">
+      <a class="label-pill" href="/categories/AI-Agent/">
         
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
 
-        Agent/RAG/微调
+        AI Agent
       </a>
     
     <h1>RAG、微调与智能体选型</h1>
@@ -364,7 +387,8 @@ Table of contents</h2>
 <li>什么时候继续优化 Prompt，什么时候上 RAG，什么时候考虑微调，什么时候再引入工作流（Workflow）或 Agent</li>
 </ul>
 <p>参考文档和资源如下：<a target="_blank" rel="noopener" href="https://didilili.github.io/ai-agents-from-zero/#/%E5%B7%A5%E5%85%B7%E5%AF%BC%E8%88%AA%E4%B8%8E%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E7%B4%A2%E5%BC%95?id=%e5%be%ae%e8%b0%83%e4%b8%8e%e6%a8%a1%e5%9e%8b%e5%af%b9%e9%bd%90">工具导航与参考资料索引</a>、<a href="www.baidu.com">百度</a></p>
-<h2 id="一、判定问题根因"><a href="#一、判定问题根因" class="headerlink" title="一、判定问题根因"></a>一、判定问题根因</h2><p>在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不好时，一上来就说”要不要进行模型微调，要不要上Agent“，但在此之前我们需要对问题进行分析诊断才会稳很多：</p>
+<h2 id="一、判定问题根因">一、判定问题根因</h2>
+<p>在真实的项目场景中，当我们发现AI应用，比如：各种私人的问答系统，回答不好时，一上来就说”要不要进行模型微调，要不要上Agent“，但在此之前我们需要对问题进行分析诊断才会稳很多：</p>
 <table>
 <thead>
 <tr>
@@ -373,7 +397,8 @@ Table of contents</h2>
 <th>考虑</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>模型是不是没有看见资料？</td>
 <td>不知道公司产品手册、公告、制度，回答没有依据</td>
 <td>RAG</td>
@@ -388,21 +413,31 @@ Table of contents</h2>
 <td>需要查资料，调接口、校验、重试</td>
 <td>工作流或Agent</td>
 </tr>
-</tbody></table>
-<p>如下图，AI应用落地的基本流程：<br><img src="/../images/agent/image1.png" alt="基本流程"></p>
-<p>1、<strong>先做Prompt</strong>：如果只是需求表达不清楚，可以把输入、输出、约束写清楚，必要时在后面再做类型校验<br>2、<strong>做RAG</strong>：如果缺少的是企业的资料、文档依据或最新知识，优先建立知识库<br>3、<strong>再微调</strong>：如果长期行为不稳，并且有高质量的数据样本和评测标准，考虑微调<br>4、<strong>继续训练（慎重）</strong>：当模型对特定领域里的知识很陌生时，考虑继续训练（但不如直接在网上找一个在对应领域的预训练模型来做）<br>5、<strong>流程固定先工作流</strong>：步骤明确、需要审计时，优先workflow<br>6、<strong>流程开放再Agent</strong>：步骤可能变化、需要动态调用工具和根据中间结果调整路线时，上Agent</p>
+</tbody>
+</table>
+<p>如下图，AI应用落地的基本流程：<br>
+<img src="/images/agent/image1.png" alt="基本流程"></p>
+<p>1、<strong>先做Prompt</strong>：如果只是需求表达不清楚，可以把输入、输出、约束写清楚，必要时在后面再做类型校验<br>
+2、<strong>做RAG</strong>：如果缺少的是企业的资料、文档依据或最新知识，优先建立知识库<br>
+3、<strong>再微调</strong>：如果长期行为不稳，并且有高质量的数据样本和评测标准，考虑微调<br>
+4、<strong>继续训练（慎重）</strong>：当模型对特定领域里的知识很陌生时，考虑继续训练（但不如直接在网上找一个在对应领域的预训练模型来做）<br>
+5、<strong>流程固定先工作流</strong>：步骤明确、需要审计时，优先workflow<br>
+6、<strong>流程开放再Agent</strong>：步骤可能变化、需要动态调用工具和根据中间结果调整路线时，上Agent</p>
 <p>整套流程并不是都需要做，对应能用轻量级的方案解决的，就不要引入重方案。</p>
-<h2 id="二、什么是RAG、模型微调以及智能体？"><a href="#二、什么是RAG、模型微调以及智能体？" class="headerlink" title="二、什么是RAG、模型微调以及智能体？"></a>二、什么是RAG、模型微调以及智能体？</h2><h3 id="（1）-RAG"><a href="#（1）-RAG" class="headerlink" title="（1） RAG"></a>（1） RAG</h3><p>RAG 即 Retrieval-Augmented Generation，检索增强生成，是一种把信息检索与大模型生成结合起来的应用架构。它的基本流程并不复杂：<code>用户提问 -》 系统从外部知识库里召回相关资料 -》 结合“问题 + 召回结果”一起发给大模型进行整理 -》 最后按特定格式进行输出生成答案</code>，可以简记为 RAG &#x3D; 先查找资料，再回答问题。其工作流程如下：</p>
-<p><img src="/../images/agent/image2.png" alt="RAG工作流程"></p>
+<h2 id="二、什么是RAG、模型微调以及智能体？">二、什么是RAG、模型微调以及智能体？</h2>
+<h3 id="（1）-RAG">（1） RAG</h3>
+<p>RAG 即 Retrieval-Augmented Generation，检索增强生成，是一种把信息检索与大模型生成结合起来的应用架构。它的基本流程并不复杂：<code>用户提问 -》 系统从外部知识库里召回相关资料 -》 结合“问题 + 召回结果”一起发给大模型进行整理 -》 最后按特定格式进行输出生成答案</code>，可以简记为 RAG = 先查找资料，再回答问题。其工作流程如下：</p>
+<p><img src="/images/agent/image2.png" alt="RAG工作流程"></p>
 <ul>
-<li><p>第一部分（知识库构建）：<code>读取原始文档 -》 进行清洗和切分 -》 用嵌入emdedding模型把文本转为向量 -》 结合文本块、向量和元数据存入数据库，如chroma</code></p>
+<li>
+<p>第一部分（知识库构建）：<code>读取原始文档 -》 进行清洗和切分 -》 用嵌入emdedding模型把文本转为向量 -》 结合文本块、向量和元数据存入数据库，如chroma</code></p>
 </li>
-<li><p>第二部分（检索与生成）：<code>用户提问 -》 向量化问题 -》 知识库召回相关内容 -》 原问题和召回内容送入prompt -》 给到大模型生成答案并返回</code></p>
+<li>
+<p>第二部分（检索与生成）：<code>用户提问 -》 向量化问题 -》 知识库召回相关内容 -》 原问题和召回内容送入prompt -》 给到大模型生成答案并返回</code></p>
 </li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(&quot;fsfs&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>其RAG的每一个环节（…）都会影响到最终效果，不只是 “向量 + 大模型” ！！！</p>
+<p>其RAG的每一个环节（...）都会影响到最终效果，不只是 “向量 + 大模型” ！！！</p>
 <p>对于效果不理想的情况，需要进行拆解：</p>
 <table>
 <thead>
@@ -412,7 +447,8 @@ Table of contents</h2>
 <th>优先排查</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>文档质量</td>
 <td>原文过期、冲突、缺页、扫描件 OCR 错误</td>
 <td>更新资料、清洗文档、保留版本和来源</td>
@@ -447,38 +483,47 @@ Table of contents</h2>
 <td>资料正确但推理仍错</td>
 <td>更换模型、加强约束，必要时再看微调或继续训练</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>RAG的优势：</p>
 <ul>
 <li><strong>更新快</strong>：知识库更新后可以重新建索引，不必重新训练模型。</li>
 <li><strong>成本低</strong>：相比微调和续训，实施门槛和试错成本通常更低。</li>
 <li><strong>可追溯</strong>：检索结果可以保留来源、页码、文件名，方便核验。</li>
 </ul>
-<p>因此RAG在典型的<strong>企业知识库问答</strong>、<strong>智能客服与售后助手（大华的华言）</strong>、<strong>研发文档问答（华昱欣的专利撰写助手）</strong>、<strong>运维排障助手</strong>、<strong>高考试题&#x2F;合同&#x2F;制度&#x2F;政策&#x2F;课程讲义等文档问答</strong>中比较实用</p>
-<h3 id="（2）微调-FT"><a href="#（2）微调-FT" class="headerlink" title="（2）微调 FT"></a>（2）微调 FT</h3><p>微调（Fine-tuning）是指在已经训练好的基础模型上，继续用特定数据做训练，使模型在某类任务、某种风格或某种输出形式上表现更稳定。可以这么说微调主要是改变模型的“风格”，不会改变模型的“智商”，如 <a target="_blank" rel="noopener" href="https://github.com/KMnO4-zx/huanhuan-chat">嬛嬛-chat</a>，利用《甄嬛传》剧本中所有关于甄嬛的台词和语句，基于大模型进行<strong>LoRA微调</strong>得到的模仿甄嬛语气的聊天语言模型。</p>
+<p>因此RAG在典型的<strong>企业知识库问答</strong>、<strong>智能客服与售后助手（大华的华言）</strong>、<strong>研发文档问答（华昱欣的专利撰写助手）</strong>、<strong>运维排障助手</strong>、<strong>高考试题/合同/制度/政策/课程讲义等文档问答</strong>中比较实用</p>
+<h3 id="（2）微调-FT">（2）微调 FT</h3>
+<p>微调（Fine-tuning）是指在已经训练好的基础模型上，继续用特定数据做训练，使模型在某类任务、某种风格或某种输出形式上表现更稳定。可以这么说微调主要是改变模型的“风格”，不会改变模型的“智商”，如 <a target="_blank" rel="noopener" href="https://github.com/KMnO4-zx/huanhuan-chat">嬛嬛-chat</a>，利用《甄嬛传》剧本中所有关于甄嬛的台词和语句，基于大模型进行<strong>LoRA微调</strong>得到的模仿甄嬛语气的聊天语言模型。</p>
 <p>它最常见的用途包括：</p>
 <ul>
-<li><p>让模型更稳定地遵循指令</p>
+<li>
+<p>让模型更稳定地遵循指令</p>
 </li>
-<li><p>让模型输出固定格式，例如 JSON、SQL、标签、分类结果</p>
+<li>
+<p>让模型输出固定格式，例如 JSON、SQL、标签、分类结果</p>
 </li>
-<li><p>让模型更符合某种业务风格、品牌口吻或术语习惯</p>
+<li>
+<p>让模型更符合某种业务风格、品牌口吻或术语习惯</p>
 </li>
-<li><p>让模型在某类任务上更稳，例如分类、抽取、代码补全、客服回复</p>
+<li>
+<p>让模型在某类任务上更稳，例如分类、抽取、代码补全、客服回复</p>
 </li>
 </ul>
-<p>所以当出现<strong>模型行为不稳定</strong>、<strong>风格和话术需要长期同一</strong>、<strong>反复修改提示词&#x2F;做结构化约束效果仍不理想</strong>，可进行微调处理，但同时也要考虑：<strong>数据量是否足够</strong>、<strong>评测标准是否合理</strong>、<strong>算力和预算是否可接受</strong></p>
+<p>所以当出现<strong>模型行为不稳定</strong>、<strong>风格和话术需要长期同一</strong>、<strong>反复修改提示词/做结构化约束效果仍不理想</strong>，可进行微调处理，但同时也要考虑：<strong>数据量是否足够</strong>、<strong>评测标准是否合理</strong>、<strong>算力和预算是否可接受</strong></p>
 <p>目前微调方案分为以下几类（<mark>这里就不展开逐个介绍了</mark>）：</p>
 <ul>
-<li><p><strong>（1）全参数微调（Full Fine-tuning）</strong>：更新模型全部参数，理论上上限更高，但训练资源和显存开销都很大，适合资源充足、目标明确的场景。</p>
+<li>
+<p><strong>（1）全参数微调（Full Fine-tuning）</strong>：更新模型全部参数，理论上上限更高，但训练资源和显存开销都很大，适合资源充足、目标明确的场景。</p>
 </li>
-<li><p><strong>（2）参数高效微调（PEFT, Parameter-Efficient Fine-Tuning）</strong>：这类方法的核心思路是：<strong>尽量少改参数，用更低成本获得可接受的效果。</strong> 最常见的两种是：</p>
+<li>
+<p><strong>（2）参数高效微调（PEFT, Parameter-Efficient Fine-Tuning）</strong>：这类方法的核心思路是：<strong>尽量少改参数，用更低成本获得可接受的效果。</strong> 最常见的两种是：</p>
 <ul>
 <li><strong>LoRA</strong>：冻结原模型大部分参数，只训练新增的低秩适配参数。</li>
 <li><strong>QLoRA</strong>：在 LoRA 基础上结合低比特量化，进一步降低显存占用。</li>
 </ul>
 </li>
-<li><p><strong>（3）其他高效方法</strong>：</p>
+<li>
+<p><strong>（3）其他高效方法</strong>：</p>
 <ul>
 <li><strong>Adapter Tuning</strong>：在模型层间插入小型适配器模块</li>
 <li><strong>Prefix Tuning</strong>：在输入前添加可学习的虚拟前缀</li>
@@ -486,7 +531,10 @@ Table of contents</h2>
 </ul>
 </li>
 </ul>
-<h3 id="（3）智能体Agent"><a href="#（3）智能体Agent" class="headerlink" title="（3）智能体Agent"></a>（3）智能体Agent</h3><p>在经典的AI语境中，智能体其实就是一个自己能够感知环境、拆解任务、调用工具、拿结果、再决定下一步改证明走的自主系统。你给他一个目标，他自己想办法搞定，不用一步步都盯着。在应用开发里边有更工程化的定义：<strong>智能体 &#x3D; 大模型 + 工具 + 状态 + 执行流程</strong>，它的五大核心要素为：大语言模型、记忆系统、工具调用、规划决策、行动执行，如下图：<br><img src="/../images/agent/image3.png" alt="LLM Agent架构"><br>它与单纯的调用大模型的区别为：</p>
+<h3 id="（3）智能体Agent">（3）智能体Agent</h3>
+<p>在经典的AI语境中，智能体其实就是一个自己能够感知环境、拆解任务、调用工具、拿结果、再决定下一步改证明走的自主系统。你给他一个目标，他自己想办法搞定，不用一步步都盯着。在应用开发里边有更工程化的定义：<strong>智能体 = 大模型 + 工具 + 状态 + 执行流程</strong>，它的五大核心要素为：大语言模型、记忆系统、工具调用、规划决策、行动执行，如下图：<br>
+<img src="/images/agent/image3.png" alt="LLM Agent架构"><br>
+它与单纯的调用大模型的区别为：</p>
 <ul>
 <li>直接调用大模型API就是“一问一答”，发一段 Prompt 过去，模型吐一段文本就回来了，直接完事，不会调整中间结果的策略。</li>
 <li>Agent有循环执行能力，可以反复走“思考-行动-反馈”，直到任务做完，同时它也能调用外部工具，搜索引擎、数据库等获取当前的最新信息，还具备记忆能力，能够根据之前的历史问题来引导后续的模型决策。</li>
@@ -581,7 +629,7 @@ Related posts</h2>
             
 <div class="paper-thumb paper-thumb-0 paper-thumb--cover">
   
-    <img class="paper-thumb__img" src="/images/agent/image6.png" alt="一文教你读懂 RAG 全链路以及各种问题" loading="lazy" referrerpolicy="no-referrer">
+    <img class="paper-thumb__img" src="/images/agent/image11.jpg" alt="一文教你读懂 RAG 全链路以及各种问题" loading="lazy" referrerpolicy="no-referrer">
   
 </div>
 
@@ -607,7 +655,7 @@ Related posts</h2>
 
   
 <footer class="site-footer">
-  <span class="site-footer__left">© 2026 By HatCat33</span>
+  <span class="site-footer__left">© 2026 By cv视觉组最憨的牛马</span>
   
     <span class="site-footer__right">
       
