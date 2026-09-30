@@ -1,0 +1,594 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f3e9" data-flatpaper-theme-color>
+
+<title>Tag: 服务器修复 | HatCat33_Blog</title>
+<meta name="description" content="Tag &quot;服务器修复&quot; includes 1 post, including 服务器修复：从显示器无信号到解决 Ubuntu 的 &#x2F;home 挂载故障.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tag: 服务器修复 | HatCat33_Blog">
+<meta property="og:url" content="https://hatcat33.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D/">
+<meta property="og:site_name" content="HatCat33_Blog">
+<meta property="og:description" content="Tag &quot;服务器修复&quot; includes 1 post, including 服务器修复：从显示器无信号到解决 Ubuntu 的 &#x2F;home 挂载故障.">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="cv视觉组最憨的牛马">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hatcat33.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D/">
+
+<link rel="icon" href="/images/favicon.png" type="image/png">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","headline":"Tag: 服务器修复 | HatCat33_Blog","name":"Tag: 服务器修复 | HatCat33_Blog","description":"Tag \"服务器修复\" includes 1 post, including 服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障.","url":"https://hatcat33.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"about":"Tag: 服务器修复"}</script>
+
+
+<script>
+  (function () {
+    var accents = { orange: 1, purple: 1, sakura: 1, blue: 1, pink: 1, green: 1, black: 1 };
+    var match = document.cookie.match(/(?:^|;\s*)flatpaper-accent=([^;]+)/);
+    var accent = 'green';
+    if (match) {
+      try { accent = decodeURIComponent(match[1]); } catch (e) {}
+    }
+    if (!accents[accent]) accent = 'green';
+    document.documentElement.setAttribute('data-accent', accent);
+    try {
+      if (localStorage.getItem('flatpaper-mode') === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    } catch (e) {}
+  })();
+
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true
+  },
+  startup: {
+    typeset: false, // 关闭自动渲染，等DOM就绪再手动触发
+    pageReady: function() {
+      return MathJax.startup.defaultPageReady().then(function(){
+        console.log("MathJax loaded, trigger typeset");
+        // 手动扫描页面全部公式
+        return MathJax.typesetPromise();
+      })
+    }
+  }
+};
+</script>
+<!-- 把async去掉！async会导致时序错乱，改成普通script -->
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="HatCat33_Blog" type="application/atom+xml">
+</head>
+
+<body
+  class="is-list tag-style-tape bg-style-default"
+  data-default-accent="green"
+  data-code-theme="sand"
+  data-note-style="sticky"
+  data-note-icons="on"
+  data-button-style="circle"
+  data-strong-accent="on"
+>
+  
+    <div class="page-grain"></div>
+  
+  <svg width="0" height="0" style="position:absolute;z-index:-1;" aria-hidden="true">
+    <defs>
+      <filter id="paper-edge" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+  
+  <header class="site-header">
+  
+  <button class="icon-button js-sidebar-toggle sidebar-toggle" type="button" aria-label="Open sidebar" aria-controls="paper-sidebar-drawer" aria-expanded="false">
+    
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-menu"></use></svg>
+
+  </button>
+
+  <div class="brand">
+    <div class="brand-mark-wrapper">
+      
+        <a class="brand-mark" href="/" aria-label="FlatPaper home">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-layout-grid"></use></svg>
+
+        </a>
+      
+    </div>
+    <a class="brand-text" href="/">HatCat33_Blog</a>
+  </div>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    
+      
+        <a class="site-nav-link " href="/">
+          
+          <span>home</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link " href="/categories">
+          
+          <span>categories</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link active" href="/tags">
+          
+          <span>tags</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link " href="/archives/">
+          
+          <span>archives</span>
+        </a>
+      
+    
+  </nav>
+
+  <div class="header-tools">
+    <button class="icon-button js-search-open" type="button" aria-label="Search posts">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-search"></use></svg>
+
+    </button>
+    <div class="accent-picker">
+      <button class="icon-button accent-toggle" type="button" aria-label="Choose theme color" title="Choose theme color" aria-haspopup="true" aria-expanded="false" aria-controls="accent-menu">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-palette"></use></svg>
+
+      </button>
+      <div class="accent-menu" id="accent-menu" role="menu" aria-label="Theme color">
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Orange" aria-checked="false" data-accent-option="orange">
+          <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Purple" aria-checked="false" data-accent-option="purple">
+          <span class="accent-swatch accent-swatch--purple" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Sakura pink" aria-checked="false" data-accent-option="sakura">
+          <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Blue" aria-checked="false" data-accent-option="blue">
+          <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Pink" aria-checked="false" data-accent-option="pink">
+          <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Green" aria-checked="false" data-accent-option="green">
+          <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Black" aria-checked="false" data-accent-option="black">
+          <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle color mode">
+      <span class="theme-icon theme-icon--sun">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-sun"></use></svg>
+</span>
+      <span class="theme-icon theme-icon--moon">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-moon"></use></svg>
+</span>
+    </button>
+  </div>
+</header>
+
+
+  
+  <main class="paper-shell ">
+    
+
+<aside id="paper-sidebar-drawer" class="paper-sidebar paper-sidebar--right" aria-label="Sidebar">
+  <div class="drawer-toolbar" aria-label="Sidebar tools">
+    <div class="drawer-accent-options" role="group" aria-label="Theme color">
+      <button type="button" class="accent-option" aria-label="Orange" aria-pressed="false" data-accent-option="orange">
+        <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Purple" aria-pressed="false" data-accent-option="purple">
+        <span class="accent-swatch accent-swatch--purple" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Sakura pink" aria-pressed="false" data-accent-option="sakura">
+        <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Blue" aria-pressed="false" data-accent-option="blue">
+        <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Pink" aria-pressed="false" data-accent-option="pink">
+        <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Green" aria-pressed="false" data-accent-option="green">
+        <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Black" aria-pressed="false" data-accent-option="black">
+        <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
+      </button>
+    </div>
+    <button class="icon-button drawer-close js-sidebar-close" type="button" aria-label="Close sidebar">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-x"></use></svg>
+
+    </button>
+  </div>
+
+  <section class="side-card nav-card">
+    <nav class="site-nav-drawer" aria-label="Mobile navigation">
+      
+        
+          <a class="" href="/">
+            
+            <span>home</span>
+          </a>
+        
+      
+        
+          <a class="" href="/categories">
+            
+            <span>categories</span>
+          </a>
+        
+      
+        
+          <a class="active" href="/tags">
+            
+            <span>tags</span>
+          </a>
+        
+      
+        
+          <a class="" href="/archives/">
+            
+            <span>archives</span>
+          </a>
+        
+      
+    </nav>
+  </section>
+
+  <section class="side-card profile-card">
+    
+      <div class="avatar avatar--image">
+        <img src="/images/profile.jpg" alt="cv视觉组最憨的牛马" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+    
+    <h3>cv视觉组最憨的牛马</h3>
+    <p class="profile-role">日常记录</p>
+    <p>目前西电计科在读硕士一枚，专注于研究点云方向（某越视觉组），以及 AI Agent应用开发学习中......</p>
+    
+    <div class="socials">
+      
+        <a href="https://github.com/HatCat33" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub">
+          
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 496 512" fill="currentColor" class="lucide lucide-github flatpaper-icon flatpaper-icon--fa-brands" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-fa-brands-github"></use></svg>
+
+          
+        </a>
+      
+        <a href="w_chenghao_w@163.com" target="_blank" rel="noopener" aria-label="Email" data-tooltip="Email">
+          
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-mail"></use></svg>
+
+          
+        </a>
+      
+      
+        
+        
+        <a href="/atom.xml" aria-label="RSS feed" data-tooltip="RSS feed">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-rss"></use></svg>
+
+        </a>
+      
+    </div>
+  </section>
+
+  
+
+  
+    <section class="side-card categories-card">
+      <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+Categories</h2>
+      
+        <a href="/categories/%E9%97%B2%E8%B0%88/">
+          <span class="dot dot-0"></span>
+          <strong>闲谈</strong>
+          <em>2</em>
+        </a>
+      
+        <a href="/categories/%E5%AE%9E%E4%B9%A0/">
+          <span class="dot dot-1"></span>
+          <strong>实习</strong>
+          <em>2</em>
+        </a>
+      
+        <a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">
+          <span class="dot dot-2"></span>
+          <strong>算法题解</strong>
+          <em>5</em>
+        </a>
+      
+        <a href="/categories/AI-Agent/">
+          <span class="dot dot-3"></span>
+          <strong>AI Agent</strong>
+          <em>2</em>
+        </a>
+      
+        <a href="/categories/%E7%82%B9%E4%BA%91%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/">
+          <span class="dot dot-0"></span>
+          <strong>点云表征学习</strong>
+          <em>2</em>
+        </a>
+      
+        <a href="/categories/AI-Infra/">
+          <span class="dot dot-1"></span>
+          <strong>AI Infra</strong>
+          <em>1</em>
+        </a>
+      
+    </section>
+
+    <section class="side-card tag-card">
+      <header class="tag-card__head">
+        <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-flame"></use></svg>
+Popular tags</h2>
+        <a class="tag-card__more" href="/tags/">
+          <span>View all</span>
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-right"></use></svg>
+
+        </a>
+      </header>
+      <div class="tag-cloud">
+        
+        
+          <a class="tag-chip tag-chip-0" href="/tags/%E7%89%9B%E5%AE%A2/">牛客</a>
+        
+          <a class="tag-chip tag-chip-1" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+        
+          <a class="tag-chip tag-chip-2" href="/tags/RAG/">RAG</a>
+        
+          <a class="tag-chip tag-chip-3" href="/tags/%E5%AE%9E%E4%B9%A0/">实习</a>
+        
+          <a class="tag-chip tag-chip-4" href="/tags/%E6%BC%94%E5%8C%96%E4%BC%98%E5%8C%96/">演化优化</a>
+        
+          <a class="tag-chip tag-chip-5" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+        
+          <a class="tag-chip tag-chip-0" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+        
+          <a class="tag-chip tag-chip-1" href="/tags/%E4%BA%8C%E5%88%86/">二分</a>
+        
+          <a class="tag-chip tag-chip-2" href="/tags/%E5%93%88%E5%B8%8C/">哈希</a>
+        
+          <a class="tag-chip tag-chip-3" href="/tags/%E7%82%B9%E4%BA%91/">点云</a>
+        
+          <a class="tag-chip tag-chip-4" href="/tags/%E8%A5%BF%E7%94%B5%E6%A0%A1%E6%8B%9B/">西电校招</a>
+        
+          <a class="tag-chip tag-chip-5" href="/tags/%E5%BE%AE%E8%B0%83/">微调</a>
+        
+          <a class="tag-chip tag-chip-0" href="/tags/Agent/">Agent</a>
+        
+          <a class="tag-chip tag-chip-1" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+        
+          <a class="tag-chip tag-chip-2" href="/tags/dfs/">dfs</a>
+        
+          <a class="tag-chip tag-chip-3" href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/">状态压缩</a>
+        
+          <a class="tag-chip tag-chip-4" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
+        
+          <a class="tag-chip tag-chip-5" href="/tags/%E5%B7%AE%E5%88%86/">差分</a>
+        
+          <a class="tag-chip tag-chip-0" href="/tags/%E8%AE%A1%E6%95%B0/">计数</a>
+        
+          <a class="tag-chip tag-chip-1" href="/tags/atcoder/">atcoder</a>
+        
+          <a class="tag-chip tag-chip-2" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+        
+          <a class="tag-chip tag-chip-3" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+        
+          <a class="tag-chip tag-chip-4" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+        
+          <a class="tag-chip tag-chip-5" href="/tags/cuda/">cuda</a>
+        
+          <a class="tag-chip tag-chip-0" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D/">服务器修复</a>
+        
+          <a class="tag-chip tag-chip-1" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a>
+        
+      </div>
+    </section>
+  
+
+  
+
+</aside>
+
+    <section class="paper-main">
+      
+<section class="archive-paper">
+  
+    <h1>服务器修复</h1>
+  
+  <div class="archive-list">
+    
+      <a class="archive-item" href="/2026/09/30/%E7%BB%84%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%A0%E4%BF%A1%E5%8F%B7%E5%88%B0%E8%A7%A3%E5%86%B3-Ubuntu-%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E6%95%85%E9%9A%9C/">
+        <span>2026-09-30</span>
+        <strong>服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障</strong>
+        <em></em>
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+      
+
+
+    </section>
+    
+      <aside class="paper-sidebar paper-sidebar--left">
+  
+  
+
+  <section class="side-card recent-card" data-random-posts-limit="8" data-random-posts-url="/flatpaper-random-posts.json" data-random-posts-current="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D/index.html">
+    <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-shuffle"></use></svg>
+Random posts</h2>
+    <ul class="recent-list js-random-posts">
+      
+        <li>
+          <a class="recent-item" href="/2026/09/30/%E7%BB%84%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%A0%E4%BF%A1%E5%8F%B7%E5%88%B0%E8%A7%A3%E5%86%B3-Ubuntu-%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E6%95%85%E9%9A%9C/">
+            <strong>服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障</strong>
+            <em>2026-09-30</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/09/29/CUDA-%E7%BC%96%E7%A8%8B%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%BB%8E%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%94%A8-Kernel/">
+            <strong>CUDA 编程初探：从线程与内存模型，到第一个实用 Kernel</strong>
+            <em>2026-09-29</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/09/20/Atcoder-abc476-%E9%A2%98%E8%A7%A3/">
+            <strong>Atcoder abc476 | 题解</strong>
+            <em>2026-09-20</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/09/18/%E5%9F%BA%E4%BA%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%9B%BE%E4%B8%8E%E6%BC%94%E5%8C%96%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%8C%96%E7%9A%843D%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/">
+            <strong>组论文研读：基于兼容性图与演化多任务优化的3D点云配准</strong>
+            <em>2026-09-18</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/09/11/%E6%BC%94%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%AE%80%E5%8D%95%E6%A6%82%E8%BF%B0/">
+            <strong>演化学习的简单概述</strong>
+            <em>2026-09-11</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/09/10/26%E8%A5%BF%E7%94%B5%E7%A7%8B%E6%8B%9B/">
+            <strong>西电2026秋招｜互联网厂宣讲会整理</strong>
+            <em>2026-09-10</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/08/29/%E4%B8%80%E6%96%87%E6%95%99%E4%BD%A0%E8%AF%BB%E6%87%82-RAG-%E5%85%A8%E9%93%BE%E8%B7%AF%E4%BB%A5%E5%8F%8A%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/">
+            <strong>一文教你读懂 RAG 全链路以及各种问题</strong>
+            <em>2026-08-29</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/2026/08/28/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B-Round-158-%E9%A2%98%E8%A7%A3/">
+            <strong>牛客周赛 Round 158 | 题解</strong>
+            <em>2026-08-28</em>
+          </a>
+        </li>
+      
+    </ul>
+  </section>
+
+
+</aside>
+
+    
+  </main>
+
+  <div class="sidebar-backdrop js-sidebar-close" aria-hidden="true"></div>
+
+  
+<footer class="site-footer">
+  <span class="site-footer__left">© 2026 By cv视觉组最憨的牛马</span>
+  
+    <span class="site-footer__right">
+      
+        <span class="site-footer__row"><span class="site-footer__powered-prefix">Powered by Theme</span> <a href="https://github.com/Homulilly/hexo-theme-flatpaper" target="_blank" rel="noopener">FlatPaper</a></span>
+      
+    </span>
+  
+</footer>
+
+  
+<div class="search-panel" aria-hidden="true" data-index-url="/flatpaper-search.json">
+  <div class="search-backdrop js-search-close"></div>
+  <section class="search-dialog" role="dialog" aria-modal="true" aria-label="Search posts">
+    <span class="tape tape--top-left" aria-hidden="true"></span>
+    <header class="search-head">
+      <h2><span class="green-dot"></span>Search posts</h2>
+      <button class="icon-button js-search-close" type="button" aria-label="Close search">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-x"></use></svg>
+
+      </button>
+    </header>
+    <label class="search-field">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-search"></use></svg>
+
+      <input id="flatpaper-search" class="search-input" type="search" placeholder="Type keywords, press Esc to close" autocomplete="off">
+    </label>
+    <div class="search-results" data-empty="Type keywords to search matching posts">
+      <p class="search-empty">Type keywords to search matching posts</p>
+    </div>
+  </section>
+</div>
+
+  <script>
+  window.FLATPAPER_I18N = {"language":"en","common.posts":"Posts","common.categories":"Categories","common.tags":"Tags","common.comments":"Comments","common.share":"Share","common.page":"Page","common.archive":"Archive","common.post_list":"Posts","common.search_posts":"Search posts","common.random_posts":"Random posts","common.reward":"Reward","common.view_all":"View all","pagination.prev":"Previous","pagination.next":"Next","pagination.post_pager":"Post pagination","pagination.archive_pager":"Archive pagination","index.featured":"Featured posts","index.pinned":"Pinned","index.read_more":"Read more","index.previous_slide":"Previous slide","index.next_slide":"Next slide","index.carousel_pagination":"Carousel pagination","index.carousel_slide":"Slide %d","index.latest_posts":"Latest posts","index.empty_posts":"No posts yet. Create your first post and the latest content will appear here.","archive.title":"Archive","archive.post_list":"Posts","taxonomy.category_count":"%d posts","taxonomy.empty_categories":"No categories yet.","taxonomy.empty_tags":"No tags yet.","links.label":"Friends","links.title":"Friend links","links.empty_data":"Could not load friend link data. Make sure source/_data/links.yml exists and run hexo clean.","links.rss_label":"%s's RSS","friends_feed.label":"Circle","friends_feed.title":"Friend circle","friends_feed.loading":"Loading friend updates...","friends_feed.missing_url":"No all.json URL configured.","friends_feed.load_failed":"Failed to load friend updates. Try again later.","friends_feed.empty":"No friend articles have been fetched yet.","friends_feed.load_more":"Load more","friends_feed.updated_at":"Updated at %s","friends_feed.friend_count":"%d friends","friends_feed.active_count":"%d active","friends_feed.article_count":"%d articles","friends_feed.unknown_author":"Unknown site","friends_feed.date_unknown":"Unknown time","guestbook.label":"Guestbook","guestbook.title":"Guestbook","guestbook.loading":"Unrolling the message wall...","guestbook.missing_config":"The wall needs a comment system: set comments: twikoo (with envId) or comments: artalk (with server) in the theme config.","guestbook.load_failed":"Failed to load messages. Try again later.","guestbook.empty":"The wall is still empty — stick the first note!","guestbook.load_more":"Show more messages","guestbook.total_count":"%d messages in total","guestbook.latest_note":"Showing the latest %d on the wall","guestbook.jump_to_comment":"View original comment","guestbook.sort_time":"View latest","guestbook.sort_random":"Random order","guestbook.anonymous":"Anonymous","guestbook.write_hint":"Leave a message below; it lands on the wall after a refresh","post.scroll_to_comments":"Jump to comments","post.previous":"Previous","post.next":"Next","post.no_previous":"No earlier posts","post.no_next":"This is the latest post","post.back_to_top":"Back to top","post.related_posts":"Related posts","post.view_more":"View more","not_found.label":"Page missing","not_found.title":"Page not found","not_found.text":"This address may have moved, been deleted, or never existed.","not_found.home":"Back home","not_found.search":"Search posts","search.placeholder":"Type keywords, press Esc to close","search.empty":"Type keywords to search matching posts","search.loading":"Loading search index...","search.load_failed":"Failed to load the search index. Reopen search and try again.","search.no_result":"No posts found for \"%s\"","search.close":"Close search","code.copy":"Copy code","code.collapse":"Collapse code","code.expand":"Expand code","heading.anchor":"Link to this section: %s","head.tag":"Tag: %s","head.category":"Category: %s","head.archive":"Archive","head.archive_with_date":"Archive: %s","head.page_number":"Page %d","navigation.primary":"Primary navigation","navigation.mobile":"Mobile navigation","navigation.brand_home":"FlatPaper home","navigation.brand_menu":"Open site navigation","navigation.open_sidebar":"Open sidebar","navigation.close_sidebar":"Close sidebar","navigation.sidebar":"Sidebar","navigation.sidebar_tools":"Sidebar tools","navigation.site_links":"Site links","navigation.site_info":"Site information","colors.choose_theme_color":"Choose theme color","colors.theme_color":"Theme color","colors.toggle_color_mode":"Toggle color mode","colors.green":"Green","colors.purple":"Purple","colors.pink":"Pink","colors.sakura":"Sakura pink","colors.blue":"Blue","colors.orange":"Orange","colors.black":"Black","profile.default_bio":"Loves life, code, and sharing notes from both.","welcome.cta":"Start reading","welcome.title":"Welcome to FlatPaper","welcome.text":"A blog theme focused on content and a calm reading experience.","home_hero.label":"Home opening","home_hero.enter":"Start reading","home_hero.note":"Today","home_hero.default_subtitle":"Daily notes","home_hero.nav_links":"Hero navigation","home_hero.profile_links":"Profile links","home_hero.tools":"Hero tools","home_hero.shuffle_stickers":"Shuffle stickers","home_hero.link":"Link","home_hero.sticker_image":"Sticker image","home_hero.visit_confirm":"Visit %s?","home_hero.visit":"Visit","home_hero.cancel":"Cancel","toc.title":"Table of contents","toc.empty":"The table of contents is generated from post headings.","toc.expand_all":"Expand all headings","toc.collapse_all":"Collapse headings","sidebar.hot_tags":"Popular tags","sidebar.latest_posts":"Latest posts"};
+  </script>
+  
+<script src="/js/main.js"></script>
+
+  
+  <style>
+.back-history-btn{position:fixed;left:24px;bottom:28px;z-index:9999 !important;padding:8px 14px;background:var(--color-card-bg);border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer;border:1px solid var(--color-border);}
+@media (max-width:768px){.back-history-btn{left:16px;bottom:20px;}}
+</style>
+<div class="back-history-btn" onclick="history.back()">← 返回</div>
+
+  
+</body>
+</html>

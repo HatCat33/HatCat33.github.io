@@ -1,0 +1,682 @@
+<!doctype html>
+
+<html lang="en" data-fancybox-enabled="1">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f3e9" data-flatpaper-theme-color>
+
+<title>服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障 | HatCat33_Blog</title>
+<meta name="description" content="故障排查时间：2026 年 9 月 27 日 整理时间：2026 年 9 月 30 日 根据当时与豆包的排查对话整理。文中的补充检查和改进建议不代表当时都已执行。 这次把组里的服务器修好了，记录一下过程，方便以后遇到类似问题时有据可查。 最开始的现象很直观：主机能够开机，但外接显示器没有信号。后来屏幕恢复显示，才发现 Ubuntu 没有正常启动，而是进入了...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器修复：从显示器无信号到解决 Ubuntu 的 &#x2F;home 挂载故障 | HatCat33_Blog">
+<meta property="og:url" content="https://hatcat33.github.io/2026/09/30/%E7%BB%84%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%A0%E4%BF%A1%E5%8F%B7%E5%88%B0%E8%A7%A3%E5%86%B3-Ubuntu-%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E6%95%85%E9%9A%9C/">
+<meta property="og:site_name" content="HatCat33_Blog">
+<meta property="og:description" content="故障排查时间：2026 年 9 月 27 日 整理时间：2026 年 9 月 30 日 根据当时与豆包的排查对话整理。文中的补充检查和改进建议不代表当时都已执行。 这次把组里的服务器修好了，记录一下过程，方便以后遇到类似问题时有据可查。 最开始的现象很直观：主机能够开机，但外接显示器没有信号。后来屏幕恢复显示，才发现 Ubuntu 没有正常启动，而是进入了...">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hatcat33.github.io/images/chat/01-emergency-mode.png">
+<meta property="og:image" content="https://hatcat33.github.io/images/chat/02-grub-menu.png">
+<meta property="og:image" content="https://hatcat33.github.io/images/chat/03-home-dependency-failed.png">
+<meta property="og:image" content="https://hatcat33.github.io/images/chat/04-fstab.png">
+<meta property="og:image" content="https://hatcat33.github.io/images/chat/05-reboot-failed.png">
+<meta property="og:image" content="https://hatcat33.github.io/images/chat/06-blkid.png">
+<meta property="article:published_time" content="2026-09-30T02:12:29.000Z">
+<meta property="article:modified_time" content="2026-09-30T02:33:52.000Z">
+<meta property="article:author" content="cv视觉组最憨的牛马">
+<meta property="article:tag" content="故障排查">
+<meta property="article:tag" content="服务器修复">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hatcat33.github.io/images/chat/01-emergency-mode.png">
+<link rel="canonical" href="https://hatcat33.github.io/2026/09/30/%E7%BB%84%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%A0%E4%BF%A1%E5%8F%B7%E5%88%B0%E8%A7%A3%E5%86%B3-Ubuntu-%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E6%95%85%E9%9A%9C/">
+
+<link rel="icon" href="/images/favicon.png" type="image/png">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障","name":"服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障 | HatCat33_Blog","description":"故障排查时间：2026 年 9 月 27 日 整理时间：2026 年 9 月 30 日 根据当时与豆包的排查对话整理。文中的补充检查和改进建议不代表当时都已执行。 这次把组里的服务器修好了，记录一下过程，方便以后遇到类似问题时有据可查。 最开始的现象很直观：主机能够开机，但外接显示器没有信号。后来屏幕恢复显示，才发现 Ubuntu 没有正常启动，而是进入了...","url":"https://hatcat33.github.io/2026/09/30/%E7%BB%84%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%A0%E4%BF%A1%E5%8F%B7%E5%88%B0%E8%A7%A3%E5%86%B3-Ubuntu-%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E6%95%85%E9%9A%9C/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/09/30/%E7%BB%84%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%A0%E4%BF%A1%E5%8F%B7%E5%88%B0%E8%A7%A3%E5%86%B3-Ubuntu-%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E6%95%85%E9%9A%9C/","datePublished":"2026-09-30T02:12:29.000Z","dateModified":"2026-09-30T02:33:52.000Z","author":{"@type":"Person","name":"cv视觉组最憨的牛马"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"服务器修复, 故障排查"}</script>
+
+
+<script>
+  (function () {
+    var accents = { orange: 1, purple: 1, sakura: 1, blue: 1, pink: 1, green: 1, black: 1 };
+    var match = document.cookie.match(/(?:^|;\s*)flatpaper-accent=([^;]+)/);
+    var accent = 'green';
+    if (match) {
+      try { accent = decodeURIComponent(match[1]); } catch (e) {}
+    }
+    if (!accents[accent]) accent = 'green';
+    document.documentElement.setAttribute('data-accent', accent);
+    try {
+      if (localStorage.getItem('flatpaper-mode') === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    } catch (e) {}
+  })();
+
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true
+  },
+  startup: {
+    typeset: false, // 关闭自动渲染，等DOM就绪再手动触发
+    pageReady: function() {
+      return MathJax.startup.defaultPageReady().then(function(){
+        console.log("MathJax loaded, trigger typeset");
+        // 手动扫描页面全部公式
+        return MathJax.typesetPromise();
+      })
+    }
+  }
+};
+</script>
+<!-- 把async去掉！async会导致时序错乱，改成普通script -->
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="HatCat33_Blog" type="application/atom+xml">
+</head>
+
+<body
+  class="is-post tag-style-tape bg-style-default"
+  data-default-accent="green"
+  data-code-theme="sand"
+  data-note-style="sticky"
+  data-note-icons="on"
+  data-button-style="circle"
+  data-strong-accent="on"
+>
+  
+    <div class="page-grain"></div>
+  
+  <svg width="0" height="0" style="position:absolute;z-index:-1;" aria-hidden="true">
+    <defs>
+      <filter id="paper-edge" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+  
+  <header class="site-header">
+  
+  <button class="icon-button js-sidebar-toggle sidebar-toggle" type="button" aria-label="Open sidebar" aria-controls="paper-sidebar-drawer" aria-expanded="false">
+    
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-menu"></use></svg>
+
+  </button>
+
+  <div class="brand">
+    <div class="brand-mark-wrapper">
+      
+        <a class="brand-mark" href="/" aria-label="FlatPaper home">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-layout-grid"></use></svg>
+
+        </a>
+      
+    </div>
+    <a class="brand-text" href="/">HatCat33_Blog</a>
+  </div>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    
+      
+        <a class="site-nav-link " href="/">
+          
+          <span>home</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link " href="/categories">
+          
+          <span>categories</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link " href="/tags">
+          
+          <span>tags</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link " href="/archives/">
+          
+          <span>archives</span>
+        </a>
+      
+    
+  </nav>
+
+  <div class="header-tools">
+    <button class="icon-button js-search-open" type="button" aria-label="Search posts">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-search"></use></svg>
+
+    </button>
+    <div class="accent-picker">
+      <button class="icon-button accent-toggle" type="button" aria-label="Choose theme color" title="Choose theme color" aria-haspopup="true" aria-expanded="false" aria-controls="accent-menu">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-palette"></use></svg>
+
+      </button>
+      <div class="accent-menu" id="accent-menu" role="menu" aria-label="Theme color">
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Orange" aria-checked="false" data-accent-option="orange">
+          <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Purple" aria-checked="false" data-accent-option="purple">
+          <span class="accent-swatch accent-swatch--purple" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Sakura pink" aria-checked="false" data-accent-option="sakura">
+          <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Blue" aria-checked="false" data-accent-option="blue">
+          <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Pink" aria-checked="false" data-accent-option="pink">
+          <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Green" aria-checked="false" data-accent-option="green">
+          <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="Black" aria-checked="false" data-accent-option="black">
+          <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle color mode">
+      <span class="theme-icon theme-icon--sun">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-sun"></use></svg>
+</span>
+      <span class="theme-icon theme-icon--moon">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-moon"></use></svg>
+</span>
+    </button>
+  </div>
+</header>
+
+
+  
+  <main class="paper-shell paper-shell--article">
+    
+
+<aside id="paper-sidebar-drawer" class="paper-sidebar paper-sidebar--right" aria-label="Sidebar">
+  <div class="drawer-toolbar" aria-label="Sidebar tools">
+    <div class="drawer-accent-options" role="group" aria-label="Theme color">
+      <button type="button" class="accent-option" aria-label="Orange" aria-pressed="false" data-accent-option="orange">
+        <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Purple" aria-pressed="false" data-accent-option="purple">
+        <span class="accent-swatch accent-swatch--purple" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Sakura pink" aria-pressed="false" data-accent-option="sakura">
+        <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Blue" aria-pressed="false" data-accent-option="blue">
+        <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Pink" aria-pressed="false" data-accent-option="pink">
+        <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Green" aria-pressed="false" data-accent-option="green">
+        <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="Black" aria-pressed="false" data-accent-option="black">
+        <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
+      </button>
+    </div>
+    <button class="icon-button drawer-close js-sidebar-close" type="button" aria-label="Close sidebar">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-x"></use></svg>
+
+    </button>
+  </div>
+
+  <section class="side-card nav-card">
+    <nav class="site-nav-drawer" aria-label="Mobile navigation">
+      
+        
+          <a class="" href="/">
+            
+            <span>home</span>
+          </a>
+        
+      
+        
+          <a class="" href="/categories">
+            
+            <span>categories</span>
+          </a>
+        
+      
+        
+          <a class="" href="/tags">
+            
+            <span>tags</span>
+          </a>
+        
+      
+        
+          <a class="" href="/archives/">
+            
+            <span>archives</span>
+          </a>
+        
+      
+    </nav>
+  </section>
+
+  <section class="side-card profile-card">
+    
+      <div class="avatar avatar--image">
+        <img src="/images/profile.jpg" alt="cv视觉组最憨的牛马" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+    
+    <h3>cv视觉组最憨的牛马</h3>
+    <p class="profile-role">日常记录</p>
+    <p>目前西电计科在读硕士一枚，专注于研究点云方向（某越视觉组），以及 AI Agent应用开发学习中......</p>
+    
+    <div class="socials">
+      
+        <a href="https://github.com/HatCat33" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub">
+          
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 496 512" fill="currentColor" class="lucide lucide-github flatpaper-icon flatpaper-icon--fa-brands" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-fa-brands-github"></use></svg>
+
+          
+        </a>
+      
+        <a href="w_chenghao_w@163.com" target="_blank" rel="noopener" aria-label="Email" data-tooltip="Email">
+          
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-mail"></use></svg>
+
+          
+        </a>
+      
+      
+        
+        
+        <a href="/atom.xml" aria-label="RSS feed" data-tooltip="RSS feed">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-rss"></use></svg>
+
+        </a>
+      
+    </div>
+  </section>
+
+  
+
+  
+    <div class="post-sticky-stack">
+      <section class="side-card toc-card">
+        <header class="toc-card__head">
+          <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table-of-contents flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-table-of-contents"></use></svg>
+Table of contents</h2>
+          <button type="button" class="toc-toggle-all" data-action="toggle-toc" aria-pressed="false" aria-label="Expand all headings" title="Expand all headings">
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-chevron-down"></use></svg>
+
+          </button>
+        </header>
+        <div class="toc-content">
+          
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%80%E5%88%9D%E4%BB%A5%E4%B8%BA%E6%98%AF%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="toc-text">1. 最初以为是显示问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B2%A1%E6%9C%89-U-%E7%9B%98%EF%BC%8C%E5%85%88%E4%BB%8E-GRUB-%E6%89%BE%E4%BF%AE%E5%A4%8D%E5%85%A5%E5%8F%A3"><span class="toc-text">2. 没有 U 盘，先从 GRUB 找修复入口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%81%A2%E5%A4%8D%E6%A8%A1%E5%BC%8F%E8%A6%81%E6%B1%82%E5%AF%86%E7%A0%81%EF%BC%8C%E6%94%B9%E7%94%A8%E4%B8%B4%E6%97%B6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="toc-text">3. 恢复模式要求密码，改用临时启动参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%BE%E5%88%B0%E9%98%BB%E5%A1%9E%E5%90%AF%E5%8A%A8%E7%9A%84-home-%E6%8C%82%E8%BD%BD%E9%A1%B9"><span class="toc-text">4. 找到阻塞启动的 &#x2F;home 挂载项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%80%E4%B8%AA%E6%8F%92%E6%9B%B2%EF%BC%9A%E4%BF%AE%E6%94%B9%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E6%99%AE%E9%80%9A-reboot-%E5%A4%B1%E8%B4%A5%E4%BA%86"><span class="toc-text">5. 一个插曲：修改完成后，普通 reboot 失败了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B3%BB%E7%BB%9F%E8%83%BD%E5%90%AF%E5%8A%A8%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8E%9F%E6%9D%A5%E7%9A%84%E6%96%87%E4%BB%B6%E8%BF%98%E6%98%AF%E6%89%BE%E4%B8%8D%E5%88%B0%EF%BC%9F"><span class="toc-text">6. 系统能启动了，为什么原来的文件还是找不到？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%9C%80%E5%90%8E%EF%BC%9A%E6%94%BE%E5%BC%83%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%88%9B%E5%BB%BA%E6%96%B0%E8%B4%A6%E6%88%B7"><span class="toc-text">7. 最后：放弃旧数据，创建新账户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E8%BF%99%E6%AC%A1%E4%BF%AE%E5%A4%8D%E7%95%99%E4%B8%8B%E7%9A%84%E7%BB%8F%E9%AA%8C"><span class="toc-text">8. 这次修复留下的经验</span></a></li></ol>
+          
+        </div>
+      </section>
+      
+
+
+    </div>
+  
+
+  
+
+</aside>
+
+    <section class="paper-main">
+      
+
+<div class="article-tape-wrap">
+<span class="tape tape--top-right" aria-hidden="true"></span>
+<article class="article-paper">
+  
+  <header class="article-header">
+    
+      <a class="label-pill" href="/categories/%E9%97%B2%E8%B0%88/">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+
+        闲谈
+      </a>
+    
+    <h1>服务器修复：从显示器无信号到解决 Ubuntu 的 /home 挂载故障</h1>
+    <div class="meta-line meta-line--article">
+      <span class="meta-date">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-calendar"></use></svg>
+2026-09-30</span>
+      
+        <span class="meta-tags">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tag"></use></svg>
+
+          <a class="meta-tag-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%AE%E5%A4%8D/">#服务器修复</a><a class="meta-tag-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">#故障排查</a>
+        </span>
+      
+    </div>
+  </header>
+
+  
+
+
+  <div class="article-content">
+    <blockquote>
+<p>故障排查时间：2026 年 9 月 27 日<br>
+整理时间：2026 年 9 月 30 日<br>
+根据当时与豆包的排查对话整理。文中的补充检查和改进建议不代表当时都已执行。</p>
+</blockquote>
+<p>这次把组里的服务器修好了，记录一下过程，方便以后遇到类似问题时有据可查。</p>
+<p>最开始的现象很直观：主机能够开机，但外接显示器没有信号。后来屏幕恢复显示，才发现 Ubuntu 没有正常启动，而是进入了 emergency mode。排查最终集中到 <code>/home</code> 的自动挂载：系统无法完成这个挂载任务，启动因此受阻。</p>
+<p>修复的关键，是通过 GRUB 进入维护环境，注释 <code>/etc/fstab</code> 中出问题的 <code>/home</code> 挂载项，让系统恢复启动。之后，我决定不再恢复原来的数据，转向创建新账户继续使用。</p>
+<h2 id="1-最初以为是显示问题">1. 最初以为是显示问题</h2>
+<p>一开始，我先确认了视频线和显示器没有问题。对话里还讨论过内存、独立显卡、供电和 BIOS 等排查方向，但没有记录能够证明这些硬件操作实际执行过，也没有确定最初“无信号”的具体原因。</p>
+<p>真正让排查方向发生变化的是：屏幕后来出现了 Linux 启动信息。对话中记录的关键内容包括：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/dev/nvme0n1p2: recovering journal</span><br><span class="line">/dev/nvme0n1p2: clean, ...</span><br><span class="line">You are in emergency mode.</span><br></pre></td></tr></table></figure>
+<p>这说明系统已经启动到了能够输出日志的阶段。接下来需要处理的是启动失败，而不能只盯着显示器和显卡。</p>
+<p><img src="/images/chat/01-emergency-mode.png" alt="启动后进入 emergency mode，屏幕显示根分区日志恢复信息"></p>
+<p><em>图 1：显示器恢复画面后，系统停在紧急模式。</em></p>
+<p>这里也要纠正一个容易产生的误解：<code>clean</code> 是文件系统状态信息，不能仅凭这一行就认定整块硬盘健康、所有数据完整，或者其他分区都没有问题。</p>
+<h2 id="2-没有-U-盘，先从-GRUB-找修复入口">2. 没有 U 盘，先从 GRUB 找修复入口</h2>
+<p>看到系统进不去，我当时也问过能不能直接重装。但现场没有 U 盘，紧急模式下又一度感觉键盘无法输入，所以继续寻找现有系统的维护入口。</p>
+<p>后来进入了 Ubuntu 的 GRUB 菜单，里面有这些选项：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu</span><br><span class="line">Advanced options for Ubuntu</span><br><span class="line">UEFI Firmware Settings</span><br></pre></td></tr></table></figure>
+<p><img src="/images/chat/02-grub-menu.png" alt="Ubuntu GRUB 启动菜单，选中 Advanced options for Ubuntu"></p>
+<p><em>图 2：通过 GRUB 的高级选项寻找恢复模式入口。</em></p>
+<p>沿着下面的路径，可以进入恢复菜单：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Advanced options for Ubuntu</span><br><span class="line">  → 带有 (recovery mode) 的内核启动项</span><br><span class="line">  → root — Drop to root shell prompt</span><br></pre></td></tr></table></figure>
+<p>恢复过程里出现了一条关键报错：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dependency failed for /home</span><br></pre></td></tr></table></figure>
+<p><img src="/images/chat/03-home-dependency-failed.png" alt="恢复菜单与启动日志，包含文件系统检查失败和 /home 依赖失败信息"></p>
+<p><em>图 3：恢复菜单上叠加了启动错误，关键线索是 <code>/home</code> 相关任务失败。</em></p>
+<p>原始照片中还可以看到，针对该 UUID 的 <code>File System Check</code> 任务启动失败。这说明文件系统检查环节也有异常，但具体原因仍需结合对应服务日志判断。</p>
+<p>这把问题范围缩小到了 <code>/home</code> 挂载及其依赖。它还不能单独说明是硬盘故障、UUID 不匹配，还是文件系统出了问题，但已经给出了明确的检查方向：查看 <code>/etc/fstab</code>。</p>
+<p>我还问过为什么不直接进 BIOS。现在回头看，两者的作用不同：BIOS/UEFI 可以检查设备识别和启动顺序，而 <code>/etc/fstab</code> 是 Linux 内部的文件，修改它需要进入系统维护环境。</p>
+<p>至于先前的键盘问题，记录里没有足够证据确定原因。密码输入通常不会显示字符，也可能被误认为“没有输入”；接口、键盘或驱动问题同样需要实际检查，不能直接下结论。</p>
+<h2 id="3-恢复模式要求密码，改用临时启动参数">3. 恢复模式要求密码，改用临时启动参数</h2>
+<p>选择恢复菜单中的 <code>root</code> 后，界面要求输入维护密码。之后，对话里的处理路径转为编辑 GRUB 启动参数，进入 Bash 维护环境。</p>
+<p>操作步骤如下，适用于有维护权限、能够操作本机控制台且允许编辑启动项的情况：</p>
+<ol>
+<li>回到 GRUB 菜单，选中对应的 Ubuntu 启动项，按 <code>e</code> 编辑。</li>
+<li>找到以 <code>linux</code> 开头的一行。</li>
+<li>保留原有的内核路径和 <code>root=...</code> 等参数，将独立的 <code>ro</code> 参数改成 <code>rw</code>。</li>
+<li>在这一行末尾追加 <code>init=/bin/bash</code>。</li>
+<li>按 <code>Ctrl+X</code> 或 <code>F10</code>，使用修改后的参数启动。</li>
+</ol>
+<p>参数变化示意如下，省略号不是需要输入的内容：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修改前：linux ... root=UUID=... ro ...</span><br><span class="line">修改后：linux ... root=UUID=... rw ... init=/bin/bash</span><br></pre></td></tr></table></figure>
+<p><code>init=/bin/bash</code> 让系统以 Bash 作为初始进程进入维护环境。通过 GRUB 菜单进行的这次编辑只对本次启动生效，不需要永久修改 GRUB 配置。</p>
+<p>如果进入维护环境后根文件系统仍然是只读的，可以重新挂载为可写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o remount,rw /</span><br></pre></td></tr></table></figure>
+<h2 id="4-找到阻塞启动的-home-挂载项">4. 找到阻塞启动的 /home 挂载项</h2>
+<p>进入命令行后，查看自动挂载配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>当时对话定位到的条目是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=8a028a25-fe21-4fcb-ae46-0e3774e9f347 /home ext4 defaults 0 2</span><br></pre></td></tr></table></figure>
+<p><img src="/images/chat/04-fstab.png" alt="维护终端中 cat /etc/fstab 的输出，包含根分区、EFI、/home 和 /home1 的配置"></p>
+<p><em>图 4：修改前的 fstab 配置，本文处理的是挂载到 <code>/home</code> 的条目。照片里还存在 <code>/home1</code> 配置，不能将两者混为一谈。</em></p>
+<p>这条配置要求系统将指定 UUID 的 ext4 文件系统挂载到 <code>/home</code>。在这台机器当时的启动流程中，这个挂载及相关依赖失败，导致系统无法正常进入默认运行环境。</p>
+<p>为了先恢复启动，使用编辑器打开文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>在对应行的开头加上 <code>#</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># UUID=8a028a25-fe21-4fcb-ae46-0e3774e9f347 /home ext4 defaults 0 2</span><br></pre></td></tr></table></figure>
+<p>在 nano 中，按 <code>Ctrl+O</code>，回车确认保存，再按 <code>Ctrl+X</code> 退出。</p>
+<p>这一步的作用是取消旧 <code>/home</code> 文件系统的自动挂载，让它不再阻塞启动。它不会修好原来的磁盘，也不会把旧文件搬到系统盘。</p>
+<p>以后再做类似操作，应该先备份配置。下面是补充的操作建议，当时对话没有记录备份步骤：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -a /etc/fstab /etc/fstab.before-home-fix</span><br></pre></td></tr></table></figure>
+<p>修改时只处理已经定位到的故障条目，保留根分区和 EFI 等正常配置。上面的 UUID 也只是本机记录，其他机器需要根据实际输出判断。</p>
+<h2 id="5-一个插曲：修改完成后，普通-reboot-失败了">5. 一个插曲：修改完成后，普通 reboot 失败了</h2>
+<p>保存配置后，还遇到了重启命令无法正常工作的情况。</p>
+<p><img src="/images/chat/05-reboot-failed.png" alt="执行 reboot 后提示系统未以 systemd 作为 PID 1 启动"></p>
+<p><em>图 5：维护环境中的普通重启命令失败，提示无法连接 systemd。</em></p>
+<p>原因与进入维护环境的方式有关：使用 <code>init=/bin/bash</code> 启动后，PID 1 是 Bash，正常的 systemd 初始化流程没有运行，依赖 systemd 的常规重启命令可能因此报错。</p>
+<p>当时对话给出的处理方式包括强制重启，以及先执行 <code>sync</code> 再通过电源重新启动。为了今后复用，这里将命令整理为先刷盘、再重启的顺序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sync</span></span><br><span class="line"><span class="built_in">exec</span> /sbin/reboot -f</span><br></pre></td></tr></table></figure>
+<p>这里的强制重启针对的是上述特殊维护环境；正常运行的服务器应使用正常关机或重启流程。<code>sync</code> 用于将尚未落盘的写入同步到磁盘，尤其是刚刚修改过的配置。</p>
+<p>重启之后，我在对话里确认：</p>
+<blockquote>
+<p>现在能够进入界面了，但是打开文件系统，显示找不到。</p>
+</blockquote>
+<p>这说明修改挂载配置后，系统已经可以进入图形界面，但原来的用户目录或文件访问问题还没有解决。</p>
+<h2 id="6-系统能启动了，为什么原来的文件还是找不到？">6. 系统能启动了，为什么原来的文件还是找不到？</h2>
+<p>原来的 <code>/home</code> 由独立文件系统提供。取消它的挂载后，路径 <code>/home</code> 通常仍然存在，但露出的是根文件系统上原本的目录，而不是旧文件系统中的内容。</p>
+<p>因此，“能进入桌面”和“原来的用户环境完整恢复”是两件事。旧用户的家目录、桌面配置和文件可能仍然不可用。</p>
+<p>随后按照对话建议查看了分区信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid</span><br></pre></td></tr></table></figure>
+<p><img src="/images/chat/06-blkid.png" alt="恢复图形界面后在终端执行 blkid，仅显示一个 NVMe 分区的文件系统信息"></p>
+<p><em>图 6：本次普通用户执行 <code>blkid</code> 的输出中没有旧 <code>/home</code> 的 UUID；这不足以单独判定磁盘损坏。</em></p>
+<p>对话中对该次输出的解读是：看到了系统盘上的分区，没有看到原 <code>/home</code> 对应的 UUID。但仅凭一次普通用户执行的 <code>blkid</code> 输出，还不能确认硬盘已经损坏。</p>
+<p>如果后续需要继续定位，可以在正常系统里结合以下信息检查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> blkid</span><br><span class="line">lsblk -f</span><br><span class="line">findmnt /home</span><br><span class="line">findmnt -T /home</span><br><span class="line"><span class="built_in">sudo</span> journalctl -b -k --no-pager</span><br></pre></td></tr></table></figure>
+<p>其中，<code>findmnt /home</code> 用来查看 <code>/home</code> 是否作为挂载点出现，<code>findmnt -T /home</code> 用来查看这个路径实际属于哪个文件系统。</p>
+<p>需要进一步区分的是：设备完全没有被识别，还是设备存在但 UUID 已经变化、文件系统无法识别，或者此前的查询信息不完整。如果设备本身不可见，再继续检查连接、供电、固件识别情况和磁盘健康状态。</p>
+<p>本次记录能够支持的结论是：<strong>旧 <code>/home</code> 挂载失败，取消该挂载后系统恢复进入界面。底层磁盘故障原因没有在对话中最终查明。</strong></p>
+<h2 id="7-最后：放弃旧数据，创建新账户">7. 最后：放弃旧数据，创建新账户</h2>
+<p>系统能够启动以后，我明确了接下来的目标：</p>
+<blockquote>
+<p>那我不想要之前的数据，我只想开一个账户。</p>
+</blockquote>
+<p>因此，后续方案是直接在当前系统中创建新用户。下面的 <code>newuser</code> 是示例用户名，应替换成实际要使用的名字：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> adduser newuser</span><br></pre></td></tr></table></figure>
+<p>按照提示设置密码并完成账户创建。如果这个账户确实需要管理员权限，再执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG <span class="built_in">sudo</span> newuser</span><br></pre></td></tr></table></figure>
+<p>在旧 <code>/home</code> 没有挂载、且 <code>/home</code> 是根文件系统下普通目录的情况下，新用户的家目录会创建在当前根文件系统中，通常就是系统盘上的 <code>/home/newuser</code>。具体位置可以用 <code>findmnt -T /home</code> 确认。</p>
+<p>分享对话到这里给出了新建账户方案，没有继续记录实际用户名及登录结果；因此这里保留操作方法，不虚构后续终端输出。</p>
+<p>以后如果重新接回旧磁盘，也不要直接把它挂回 <code>/home</code>：这样会遮住当前系统盘上新建的家目录。更合适的做法是先挂载到单独的临时目录，确认内容，再规划迁移。</p>
+<h2 id="8-这次修复留下的经验">8. 这次修复留下的经验</h2>
+<p>这次最有效的转折，是从“显示器无信号”这个最初印象，转向阅读真正出现的启动日志。<code>Dependency failed for /home</code> 比泛泛地猜测硬件问题更有助于缩小范围。</p>
+<p>有几件事值得记下来：</p>
+<ul>
+<li><strong>先判断卡在哪个阶段。</strong> 固件、GRUB、内核、文件系统挂载和用户登录，对应的排查入口不同。</li>
+<li><strong>启动失败时检查挂载配置。</strong> <code>/etc/fstab</code> 中一个不可用的必要挂载，就可能影响整台机器的启动。</li>
+<li><strong>恢复启动与恢复数据要分别确认。</strong> 注释挂载项解决了本次启动障碍，但没有证明旧磁盘恢复，也没有恢复旧用户环境。</li>
+<li><strong>把现象和推断分开。</strong> <code>clean</code> 不等于磁盘全面健康，查不到 UUID 也不等于硬盘已经报废。</li>
+<li><strong>保留修改前的配置。</strong> 对共享服务器来说，一份备份和一段清楚的修复记录，可以省掉下次排查时大量猜测。</li>
+</ul>
+<p>这次没有走到重装系统那一步，而是通过调整旧 <code>/home</code> 的挂载配置让 Ubuntu 重新进入界面。服务器恢复使用之后，把故障过程留下来，下一次遇到类似情况就有了明确的起点。</p>
+<hr>
+<p>原始排查记录：<a target="_blank" rel="noopener" href="https://www.doubao.com/thread/w57f0314313ac2202">与豆包的对话：排查电脑无信号故障</a></p>
+
+  </div>
+
+  <footer class="article-reactions">
+    <div class="reaction-group">
+      <button type="button" class="reaction reaction--comment" aria-label="Jump to comments" data-action="scroll-to-comments">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-message-circle"></use></svg>
+
+      </button>
+      <span class="reaction-label">Comments</span>
+      
+    </div>
+    <div class="reaction-group reaction-group--right">
+      
+<div class="reaction-pop reaction-pop--right">
+  <button type="button" class="reaction reaction--reward" data-action="toggle-pop" aria-expanded="false" aria-label="赞赏">
+    
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 576 512" fill="currentColor" class="lucide lucide-weixin flatpaper-icon flatpaper-icon--fa-brands" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-fa-brands-weixin"></use></svg>
+
+  </button>
+  <span class="reaction-label">赞赏</span>
+  <div class="reaction-bubble" role="dialog" aria-label="微信赞赏" hidden>
+    <div class="reaction-bubble-title">微信赞赏</div>
+    <img class="reaction-bubble-img no-zoom" src="/images/weixin.png" alt="微信赞赏" loading="lazy">
+  </div>
+</div>
+
+      <button type="button" class="reaction reaction--share" aria-label="Share" data-action="share">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2 flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-share-2"></use></svg>
+
+      </button>
+      <span class="reaction-label">Share</span>
+    </div>
+  </footer>
+
+  
+
+
+  <nav class="article-actions">
+    
+      <span class="article-action article-action--prev is-disabled" aria-disabled="true">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-left"></use></svg>
+
+        <span class="action-label">Previous</span>
+        <span class="action-title">No earlier posts</span>
+      </span>
+    
+    
+      <a class="article-action article-action--next" href="/2026/09/29/CUDA-%E7%BC%96%E7%A8%8B%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%BB%8E%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%94%A8-Kernel/">
+        <span class="action-label">Next</span>
+        <span class="action-title">CUDA 编程初探：从线程与内存模型，到第一个实用 Kernel</span>
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-right"></use></svg>
+
+      </a>
+    
+  </nav>
+</article>
+</div>
+
+<button type="button" class="back-to-top" data-action="scroll-to-top" aria-label="Back to top" hidden>
+  
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-up"></use></svg>
+
+</button>
+
+
+  <section class="related-paper">
+    <header class="related-paper__head">
+      <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-link"></use></svg>
+Related posts</h2>
+      <a class="related-paper__more" href="/archives/">
+        <span>View more</span>
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-right"></use></svg>
+
+      </a>
+    </header>
+    <div class="related-paper__grid">
+      
+        <a class="related-card" href="/2026/09/10/26%E8%A5%BF%E7%94%B5%E7%A7%8B%E6%8B%9B/">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="/images/chat/image.jpg" alt="西电2026秋招｜互联网厂宣讲会整理" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">西电2026秋招｜互联网厂宣讲会整理</strong>
+            <em class="related-card__date">2026-09-10</em>
+          </span>
+        </a>
+      
+    </div>
+  </section>
+
+
+
+
+      
+
+
+    </section>
+    
+  </main>
+
+  <div class="sidebar-backdrop js-sidebar-close" aria-hidden="true"></div>
+
+  
+<footer class="site-footer">
+  <span class="site-footer__left">© 2026 By cv视觉组最憨的牛马</span>
+  
+    <span class="site-footer__right">
+      
+        <span class="site-footer__row"><span class="site-footer__powered-prefix">Powered by Theme</span> <a href="https://github.com/Homulilly/hexo-theme-flatpaper" target="_blank" rel="noopener">FlatPaper</a></span>
+      
+    </span>
+  
+</footer>
+
+  
+<div class="search-panel" aria-hidden="true" data-index-url="/flatpaper-search.json">
+  <div class="search-backdrop js-search-close"></div>
+  <section class="search-dialog" role="dialog" aria-modal="true" aria-label="Search posts">
+    <span class="tape tape--top-left" aria-hidden="true"></span>
+    <header class="search-head">
+      <h2><span class="green-dot"></span>Search posts</h2>
+      <button class="icon-button js-search-close" type="button" aria-label="Close search">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-x"></use></svg>
+
+      </button>
+    </header>
+    <label class="search-field">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-search"></use></svg>
+
+      <input id="flatpaper-search" class="search-input" type="search" placeholder="Type keywords, press Esc to close" autocomplete="off">
+    </label>
+    <div class="search-results" data-empty="Type keywords to search matching posts">
+      <p class="search-empty">Type keywords to search matching posts</p>
+    </div>
+  </section>
+</div>
+
+  <script>
+  window.FLATPAPER_I18N = {"language":"en","common.posts":"Posts","common.categories":"Categories","common.tags":"Tags","common.comments":"Comments","common.share":"Share","common.page":"Page","common.archive":"Archive","common.post_list":"Posts","common.search_posts":"Search posts","common.random_posts":"Random posts","common.reward":"Reward","common.view_all":"View all","pagination.prev":"Previous","pagination.next":"Next","pagination.post_pager":"Post pagination","pagination.archive_pager":"Archive pagination","index.featured":"Featured posts","index.pinned":"Pinned","index.read_more":"Read more","index.previous_slide":"Previous slide","index.next_slide":"Next slide","index.carousel_pagination":"Carousel pagination","index.carousel_slide":"Slide %d","index.latest_posts":"Latest posts","index.empty_posts":"No posts yet. Create your first post and the latest content will appear here.","archive.title":"Archive","archive.post_list":"Posts","taxonomy.category_count":"%d posts","taxonomy.empty_categories":"No categories yet.","taxonomy.empty_tags":"No tags yet.","links.label":"Friends","links.title":"Friend links","links.empty_data":"Could not load friend link data. Make sure source/_data/links.yml exists and run hexo clean.","links.rss_label":"%s's RSS","friends_feed.label":"Circle","friends_feed.title":"Friend circle","friends_feed.loading":"Loading friend updates...","friends_feed.missing_url":"No all.json URL configured.","friends_feed.load_failed":"Failed to load friend updates. Try again later.","friends_feed.empty":"No friend articles have been fetched yet.","friends_feed.load_more":"Load more","friends_feed.updated_at":"Updated at %s","friends_feed.friend_count":"%d friends","friends_feed.active_count":"%d active","friends_feed.article_count":"%d articles","friends_feed.unknown_author":"Unknown site","friends_feed.date_unknown":"Unknown time","guestbook.label":"Guestbook","guestbook.title":"Guestbook","guestbook.loading":"Unrolling the message wall...","guestbook.missing_config":"The wall needs a comment system: set comments: twikoo (with envId) or comments: artalk (with server) in the theme config.","guestbook.load_failed":"Failed to load messages. Try again later.","guestbook.empty":"The wall is still empty — stick the first note!","guestbook.load_more":"Show more messages","guestbook.total_count":"%d messages in total","guestbook.latest_note":"Showing the latest %d on the wall","guestbook.jump_to_comment":"View original comment","guestbook.sort_time":"View latest","guestbook.sort_random":"Random order","guestbook.anonymous":"Anonymous","guestbook.write_hint":"Leave a message below; it lands on the wall after a refresh","post.scroll_to_comments":"Jump to comments","post.previous":"Previous","post.next":"Next","post.no_previous":"No earlier posts","post.no_next":"This is the latest post","post.back_to_top":"Back to top","post.related_posts":"Related posts","post.view_more":"View more","not_found.label":"Page missing","not_found.title":"Page not found","not_found.text":"This address may have moved, been deleted, or never existed.","not_found.home":"Back home","not_found.search":"Search posts","search.placeholder":"Type keywords, press Esc to close","search.empty":"Type keywords to search matching posts","search.loading":"Loading search index...","search.load_failed":"Failed to load the search index. Reopen search and try again.","search.no_result":"No posts found for \"%s\"","search.close":"Close search","code.copy":"Copy code","code.collapse":"Collapse code","code.expand":"Expand code","heading.anchor":"Link to this section: %s","head.tag":"Tag: %s","head.category":"Category: %s","head.archive":"Archive","head.archive_with_date":"Archive: %s","head.page_number":"Page %d","navigation.primary":"Primary navigation","navigation.mobile":"Mobile navigation","navigation.brand_home":"FlatPaper home","navigation.brand_menu":"Open site navigation","navigation.open_sidebar":"Open sidebar","navigation.close_sidebar":"Close sidebar","navigation.sidebar":"Sidebar","navigation.sidebar_tools":"Sidebar tools","navigation.site_links":"Site links","navigation.site_info":"Site information","colors.choose_theme_color":"Choose theme color","colors.theme_color":"Theme color","colors.toggle_color_mode":"Toggle color mode","colors.green":"Green","colors.purple":"Purple","colors.pink":"Pink","colors.sakura":"Sakura pink","colors.blue":"Blue","colors.orange":"Orange","colors.black":"Black","profile.default_bio":"Loves life, code, and sharing notes from both.","welcome.cta":"Start reading","welcome.title":"Welcome to FlatPaper","welcome.text":"A blog theme focused on content and a calm reading experience.","home_hero.label":"Home opening","home_hero.enter":"Start reading","home_hero.note":"Today","home_hero.default_subtitle":"Daily notes","home_hero.nav_links":"Hero navigation","home_hero.profile_links":"Profile links","home_hero.tools":"Hero tools","home_hero.shuffle_stickers":"Shuffle stickers","home_hero.link":"Link","home_hero.sticker_image":"Sticker image","home_hero.visit_confirm":"Visit %s?","home_hero.visit":"Visit","home_hero.cancel":"Cancel","toc.title":"Table of contents","toc.empty":"The table of contents is generated from post headings.","toc.expand_all":"Expand all headings","toc.collapse_all":"Collapse headings","sidebar.hot_tags":"Popular tags","sidebar.latest_posts":"Latest posts"};
+  </script>
+  
+<script src="/js/main.js"></script>
+
+  
+  <style>
+.back-history-btn{position:fixed;left:24px;bottom:28px;z-index:9999 !important;padding:8px 14px;background:var(--color-card-bg);border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer;border:1px solid var(--color-border);}
+@media (max-width:768px){.back-history-btn{left:16px;bottom:20px;}}
+</style>
+<div class="back-history-btn" onclick="history.back()">← 返回</div>
+
+  
+</body>
+</html>

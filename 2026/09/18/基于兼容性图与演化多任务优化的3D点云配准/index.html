@@ -7,18 +7,18 @@
 <meta name="theme-color" content="#f7f3e9" data-flatpaper-theme-color>
 
 <title>组论文研读：基于兼容性图与演化多任务优化的3D点云配准 | HatCat33_Blog</title>
-<meta name="description" content="3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 TECV 的论文 Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration ，简称 EMCGPCR，这篇论文的创新点在于把 “...">
+<meta name="description" content="3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 IEEE CEC 的论文 Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration ，简称 EMCGPCR，这篇论文的创新点在...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组论文研读：基于兼容性图与演化多任务优化的3D点云配准 | HatCat33_Blog">
 <meta property="og:url" content="https://hatcat33.github.io/2026/09/18/%E5%9F%BA%E4%BA%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%9B%BE%E4%B8%8E%E6%BC%94%E5%8C%96%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%8C%96%E7%9A%843D%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/">
 <meta property="og:site_name" content="HatCat33_Blog">
-<meta property="og:description" content="3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 TECV 的论文 Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration ，简称 EMCGPCR，这篇论文的创新点在于把 “...">
+<meta property="og:description" content="3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 IEEE CEC 的论文 Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration ，简称 EMCGPCR，这篇论文的创新点在...">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hatcat33.github.io/images/EA/image4.jpg">
 <meta property="og:image" content="https://hatcat33.github.io/images/EA/image5.png">
 <meta property="og:image" content="https://hatcat33.github.io/images/EA/image6.png">
 <meta property="article:published_time" content="2026-09-18T15:12:44.000Z">
-<meta property="article:modified_time" content="2026-09-18T15:31:42.000Z">
+<meta property="article:modified_time" content="2026-09-29T15:32:42.000Z">
 <meta property="article:author" content="cv视觉组最憨的牛马">
 <meta property="article:tag" content="演化优化">
 <meta property="article:tag" content="点云">
@@ -28,7 +28,7 @@
 
 <link rel="icon" href="/images/favicon.png" type="image/png">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"组论文研读：基于兼容性图与演化多任务优化的3D点云配准","name":"组论文研读：基于兼容性图与演化多任务优化的3D点云配准 | HatCat33_Blog","description":"3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 TECV 的论文 Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration ，简称 EMCGPCR，这篇论文的创新点在于把 “...","url":"https://hatcat33.github.io/2026/09/18/%E5%9F%BA%E4%BA%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%9B%BE%E4%B8%8E%E6%BC%94%E5%8C%96%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%8C%96%E7%9A%843D%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/09/18/%E5%9F%BA%E4%BA%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%9B%BE%E4%B8%8E%E6%BC%94%E5%8C%96%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%8C%96%E7%9A%843D%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/","datePublished":"2026-09-18T15:12:44.000Z","dateModified":"2026-09-18T15:31:42.000Z","author":{"@type":"Person","name":"cv视觉组最憨的牛马"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"演化优化, 点云"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"组论文研读：基于兼容性图与演化多任务优化的3D点云配准","name":"组论文研读：基于兼容性图与演化多任务优化的3D点云配准 | HatCat33_Blog","description":"3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 IEEE CEC 的论文 Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration ，简称 EMCGPCR，这篇论文的创新点在...","url":"https://hatcat33.github.io/2026/09/18/%E5%9F%BA%E4%BA%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%9B%BE%E4%B8%8E%E6%BC%94%E5%8C%96%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%8C%96%E7%9A%843D%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/09/18/%E5%9F%BA%E4%BA%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%9B%BE%E4%B8%8E%E6%BC%94%E5%8C%96%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%8C%96%E7%9A%843D%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/","datePublished":"2026-09-18T15:12:44.000Z","dateModified":"2026-09-29T15:32:42.000Z","author":{"@type":"Person","name":"cv视觉组最憨的牛马"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"演化优化, 点云"}</script>
 
 
 <script>
@@ -160,6 +160,13 @@ window.MathJax = {
         </a>
       
     
+      
+        <a class="site-nav-link " href="/archives/">
+          
+          <span>archives</span>
+        </a>
+      
+    
   </nav>
 
   <div class="header-tools">
@@ -270,6 +277,13 @@ window.MathJax = {
           </a>
         
       
+        
+          <a class="" href="/archives/">
+            
+            <span>archives</span>
+          </a>
+        
+      
     </nav>
   </section>
 
@@ -353,11 +367,11 @@ Table of contents</h2>
   
   <header class="article-header">
     
-      <a class="label-pill" href="/categories/%E6%BC%94%E5%8C%96%E4%BC%98%E5%8C%96%E3%80%81%E7%82%B9%E4%BA%91/">
+      <a class="label-pill" href="/categories/%E7%82%B9%E4%BA%91%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/">
         
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
 
-        演化优化、点云
+        点云表征学习
       </a>
     
     <h1>组论文研读：基于兼容性图与演化多任务优化的3D点云配准</h1>
@@ -381,7 +395,7 @@ Table of contents</h2>
 
   <div class="article-content">
     <p><img src="/images/EA/image4.jpg" alt="Point cloud Registeration"></p>
-<p>3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 <code>TECV</code> 的论文 <code>Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration</code> ，简称 <code>EMCGPCR</code>，这篇论文的创新点在于把 <strong>“兼容性图”</strong> 和 <strong>“演化多任务优化”</strong> 结合了起来，有效解决了传统配准方法中容易受噪声干扰和陷入局部最优的问题。</p>
+<p>3D点云配准是计算机视觉领域的核心任务之一，其主要目标是估计出一个变换矩阵，从而准确地对齐一对点云数据。这周我看了丁师兄24年发在 <code>IEEE CEC</code> 的论文 <code>Evolutionary Multitasking with Compatibility Graph for Point Cloud Registration</code> ，简称 <code>EMCGPCR</code>，这篇论文的创新点在于把 <strong>“兼容性图”</strong> 和 <strong>“演化多任务优化”</strong> 结合了起来，有效解决了传统配准方法中容易受噪声干扰和陷入局部最优的问题。</p>
 <h1>点云配准的核心挑战和解决思路</h1>
 <p>在点云配准中，直接从源点云和目标点云中寻找正确的匹配关系是非常困难的，尤其是当数据中存在大量<code>离群点（噪声）</code>或出现<code>“跨物体匹配”</code>的误导时。为了更好地挖掘点云间的一致性关系，论文采用了构建兼容性图（Compatibility Graph）的方法。</p>
 <p>不同的图构建方法具有不同的约束条件，这会导致图空间中搜索信息的侧重点产生差异。为此，论文巧妙地引入了演化多任务优化（Evolutionary Multitask Optimization, EMTO）框架，通过构建两个不同约束条件的图作为两个同时进行的任务，让它们在统一的搜索空间中互相传递知识、取长补短。</p>
@@ -478,9 +492,9 @@ Table of contents</h2>
       </a>
     
     
-      <a class="article-action article-action--next" href="/2026/09/13/New-Post-%E7%BC%96%E5%8F%B7/">
+      <a class="article-action article-action--next" href="/2026/09/11/%E6%BC%94%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%AE%80%E5%8D%95%E6%A6%82%E8%BF%B0/">
         <span class="action-label">Next</span>
-        <span class="action-title">New Post 编号</span>
+        <span class="action-title">演化学习的简单概述</span>
         
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-right"></use></svg>
 
@@ -529,6 +543,8 @@ Related posts</h2>
       
     </div>
   </section>
+
+
 
 
       
