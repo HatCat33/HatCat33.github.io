@@ -2171,5 +2171,88 @@
     syncBackToTop();
   }
 
+  // ---- Optional site mascot ----
+  (function () {
+    var mascot = document.querySelector('[data-site-mascot]');
+    if (!mascot) return;
+    var talkButton = mascot.querySelector('[data-action="talk-mascot"]');
+    var hideButton = mascot.querySelector('[data-action="hide-mascot"]');
+    var showButton = document.querySelector('[data-action="show-mascot"]');
+    var messageEl = mascot.querySelector('[data-mascot-message]');
+    var messages = [];
+    try { messages = JSON.parse(mascot.getAttribute('data-messages') || '[]'); } catch (e) { messages = []; }
+    messages = messages.filter(function (message) { return typeof message === 'string' && message.trim(); });
+    var messageIndex = 0;
+    var hideTimer = null;
+    var nextTimer = null;
+    var duration = parseInt(mascot.getAttribute('data-duration'), 10) || 4800;
+    var interval = parseInt(mascot.getAttribute('data-interval'), 10) || 18000;
+    var hiddenKey = 'flatpaper-mascot-hidden';
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function clearMascotTimers() {
+      window.clearTimeout(hideTimer);
+      window.clearTimeout(nextTimer);
+    }
+
+    function scheduleNext() {
+      window.clearTimeout(nextTimer);
+      nextTimer = window.setTimeout(function () { speak(true); }, interval);
+    }
+
+    function speak(advance) {
+      clearMascotTimers();
+      if (advance && messages.length) messageIndex = (messageIndex + 1) % messages.length;
+      if (messages.length && messageEl) messageEl.textContent = messages[messageIndex];
+      mascot.classList.add('is-speaking');
+      hideTimer = window.setTimeout(function () {
+        mascot.classList.remove('is-speaking');
+        scheduleNext();
+      }, duration);
+    }
+
+    function setHidden(hidden) {
+      clearMascotTimers();
+      mascot.classList.toggle('is-hidden', hidden);
+      mascot.classList.remove('is-speaking');
+      if (showButton) showButton.hidden = !hidden;
+      safeStorage.set(hiddenKey, hidden ? '1' : '0');
+      if (!hidden) speak(false);
+    }
+
+    if (talkButton) talkButton.addEventListener('click', function () { speak(true); });
+    if (hideButton) hideButton.addEventListener('click', function () { setHidden(true); });
+    if (showButton) showButton.addEventListener('click', function () { setHidden(false); });
+
+    talkButton.addEventListener('pointerenter', function () { mascot.classList.add('is-hovered'); });
+    talkButton.addEventListener('pointerleave', function () { mascot.classList.remove('is-hovered'); });
+
+    if (!reducedMotion && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+      var lookFrame = null;
+      var pointerX = window.innerWidth;
+      var pointerY = window.innerHeight;
+      function updateLook() {
+        lookFrame = null;
+        if (mascot.classList.contains('is-hidden')) return;
+        var rect = talkButton.getBoundingClientRect();
+        var dx = (pointerX - (rect.left + rect.width * 0.58)) / Math.max(window.innerWidth * 0.42, 1);
+        var dy = (pointerY - (rect.top + rect.height * 0.43)) / Math.max(window.innerHeight * 0.42, 1);
+        var lookX = Math.max(-3.2, Math.min(3.2, dx * 3.2));
+        var lookY = Math.max(-2.4, Math.min(2.4, dy * 2.4));
+        mascot.style.setProperty('--mascot-look-x', lookX.toFixed(2) + 'px');
+        mascot.style.setProperty('--mascot-look-y', lookY.toFixed(2) + 'px');
+      }
+      document.addEventListener('pointermove', function (event) {
+        if (event.pointerType && event.pointerType !== 'mouse') return;
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        if (!lookFrame) lookFrame = window.requestAnimationFrame(updateLook);
+      });
+    }
+
+    if (safeStorage.get(hiddenKey) === '1') setHidden(true);
+    else speak(false);
+  })();
+
   bindGlobalOnce();
 })();
