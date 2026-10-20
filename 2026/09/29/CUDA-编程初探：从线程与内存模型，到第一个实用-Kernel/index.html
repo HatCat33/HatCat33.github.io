@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://hatcat33.github.io/images/ai_infra/image2.png">
 <meta property="og:image" content="https://hatcat33.github.io/images/ai_infra/image.png">
 <meta property="article:published_time" content="2026-09-29T15:47:01.000Z">
-<meta property="article:modified_time" content="2026-10-01T04:03:40.000Z">
+<meta property="article:modified_time" content="2026-10-02T16:46:44.000Z">
 <meta property="article:author" content="cv视觉组最憨的牛马">
 <meta property="article:tag" content="cuda 编程">
 <meta name="twitter:card" content="summary">
@@ -27,7 +27,7 @@
 
 <link rel="icon" href="/images/favicon.png" type="image/png">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CUDA 编程初探：从线程与内存模型，到第一个实用 Kernel","name":"CUDA 编程初探：从线程与内存模型，到第一个实用 Kernel | HatCat33_Blog","description":"写一个 CPU 版本的向量加法，只需要一个循环：逐个取出两个数组里的元素，相加，再写回结果。如果数组里有上千万个元素，而且每次加法互不依赖，能不能让大量线程一起做这件事？ CUDA 提供了这样的编程方式。不过，把循环搬到 GPU 上，还需要回答几个问题：每个线程负责哪个元素？输入数据存在哪里？CPU 什么时候能读取结果？GPU 计算很快，为什么整个程序却不一...","url":"https://hatcat33.github.io/2026/09/29/CUDA-%E7%BC%96%E7%A8%8B%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%BB%8E%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%94%A8-Kernel/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/09/29/CUDA-%E7%BC%96%E7%A8%8B%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%BB%8E%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%94%A8-Kernel/","datePublished":"2026-09-29T15:47:01.000Z","dateModified":"2026-10-01T04:03:40.000Z","author":{"@type":"Person","name":"cv视觉组最憨的牛马"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"cuda 编程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CUDA 编程初探：从线程与内存模型，到第一个实用 Kernel","name":"CUDA 编程初探：从线程与内存模型，到第一个实用 Kernel | HatCat33_Blog","description":"写一个 CPU 版本的向量加法，只需要一个循环：逐个取出两个数组里的元素，相加，再写回结果。如果数组里有上千万个元素，而且每次加法互不依赖，能不能让大量线程一起做这件事？ CUDA 提供了这样的编程方式。不过，把循环搬到 GPU 上，还需要回答几个问题：每个线程负责哪个元素？输入数据存在哪里？CPU 什么时候能读取结果？GPU 计算很快，为什么整个程序却不一...","url":"https://hatcat33.github.io/2026/09/29/CUDA-%E7%BC%96%E7%A8%8B%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%BB%8E%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%94%A8-Kernel/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"HatCat33_Blog","url":"https://hatcat33.github.io/"},"mainEntityOfPage":"https://hatcat33.github.io/2026/09/29/CUDA-%E7%BC%96%E7%A8%8B%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%BB%8E%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%94%A8-Kernel/","datePublished":"2026-09-29T15:47:01.000Z","dateModified":"2026-10-02T16:46:44.000Z","author":{"@type":"Person","name":"cv视觉组最憨的牛马"},"publisher":{"@type":"Organization","name":"HatCat33_Blog"},"keywords":"cuda 编程"}</script>
 
 
 <script>
@@ -294,7 +294,7 @@ window.MathJax = {
     
     <h3>cv视觉组最憨的牛马</h3>
     <p class="profile-role">日常记录</p>
-    <p>目前西电计科在读硕士一枚，专注于研究点云方向（某越视觉组），以及 AI Agent应用开发学习中......</p>
+    <p>目前西电计科在读硕士一枚，专注于研究点云方向（某越视觉组），以及 AI Agent应用开发、Infra学习中......</p>
     
     <div class="socials">
       
@@ -683,9 +683,9 @@ Table of contents</h2>
 <h2 id="6-第一个实用-Kernel：向量加法">6. 第一个实用 Kernel：向量加法</h2>
 <p>目标是计算：</p>
 
-    <span id="mjx-96b10f6">
+    <span id="mjx-d3ca0f">
       <style>
-      #mjx-96b10f6{
+      #mjx-d3ca0f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -901,9 +901,9 @@ g[data-mml-node="xypic"] path {
 <h3 id="7-3-向量加法为什么容易受带宽限制？">7.3 向量加法为什么容易受带宽限制？</h3>
 <p>每处理一个 <code>float</code> 元素，需要读取 <code>A[i]</code>、读取 <code>B[i]</code>、写入 <code>C[i]</code>，按算法计算共访问 12 字节，只做一次浮点加法。因此算术强度为：</p>
 
-    <span id="mjx-95c1d9f">
+    <span id="mjx-c63cfb9">
       <style>
-      #mjx-95c1d9f{
+      #mjx-c63cfb9{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1065,9 +1065,9 @@ g[data-mml-node="xypic"] path {
 <p>原代码采用 <code>N = 1 &lt;&lt; 24 = 16,777,216</code>。一个 <code>float</code> 数组占 <code>67,108,864</code> 字节，也就是 <strong>64 MiB</strong>，三个数组的算法访存量为 <strong>192 MiB</strong>，约 <strong>201.33 MB</strong>。源码以 <code>1024 × 1024</code> 为除数却打印 <code>MB</code>，严格说应标成 <code>MiB</code>。</p>
 <p>有效带宽的计算方式是：</p>
 
-    <span id="mjx-0700996">
+    <span id="mjx-c974d57">
       <style>
-      #mjx-0700996{
+      #mjx-c974d57{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1270,9 +1270,9 @@ g[data-mml-node="xypic"] path {
 <p>对应文件：<code>dot_product.cu</code>。</p>
 <p>向量点积计算：</p>
 
-    <span id="mjx-906a893">
+    <span id="mjx-7a5f9b3">
       <style>
-      #mjx-906a893{
+      #mjx-7a5f9b3{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1446,9 +1446,9 @@ g[data-mml-node="xypic"] path {
 <h3 id="8-2-为什么-CPU-与-GPU-的结果可能有差异？">8.2 为什么 CPU 与 GPU 的结果可能有差异？</h3>
 <p>浮点加法不满足严格的结合律：</p>
 
-    <span id="mjx-ca0fa37">
+    <span id="mjx-42228f7">
       <style>
-      #mjx-ca0fa37{
+      #mjx-42228f7{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1612,9 +1612,9 @@ g[data-mml-node="xypic"] path {
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> reference = <span class="number">0.0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">    reference += <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(h_A[i])</span><br><span class="line">               * <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(h_B[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>再根据精度目标同时考虑绝对误差和相对误差：</p>
 
-    <span id="mjx-b50a522">
+    <span id="mjx-e2d66ed">
       <style>
-      #mjx-b50a522{
+      #mjx-e2d66ed{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1778,9 +1778,9 @@ g[data-mml-node="xypic"] path {
 <p>原代码在 CPU 汇总之后才记录结束 Event，两个事件之间可能包含主机工作造成的设备空闲间隔。若要可靠描述完整点积流程，建议用主机时钟包住 H2D、Kernel、部分和回传以及 CPU 最终求和。</p>
 <p>第一阶段 Kernel 的逻辑全局访存量近似为：</p>
 
-    <span id="mjx-19e24d1">
+    <span id="mjx-d938174">
       <style>
-      #mjx-19e24d1{
+      #mjx-d938174{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1943,9 +1943,9 @@ g[data-mml-node="xypic"] path {
 <p>对应文件：<code>saxpy.cu</code>。</p>
 <p>SAXPY 是单精度 BLAS 基础操作，形式为：</p>
 
-    <span id="mjx-4dfd4bd">
+    <span id="mjx-35db4f">
       <style>
-      #mjx-4dfd4bd{
+      #mjx-35db4f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2114,9 +2114,9 @@ g[data-mml-node="xypic"] path {
 <p>GPU 编译器可能把 <code>a * A[idx] + B[idx]</code> 合并成 FMA（融合乘加），只进行一次舍入；CPU 是否采用相同方式取决于指令集和编译选项。两边的结果可能出现小幅差异，因此应采用合适的容差，并检查 NaN、Inf 等异常值。</p>
 <p>SAXPY 每个元素读取两个 <code>float</code>、写回一个 <code>float</code>，逻辑访存量仍是 12 字节，按常规计数完成 2 FLOPs：</p>
 
-    <span id="mjx-702d879">
+    <span id="mjx-f30b5aa">
       <style>
-      #mjx-702d879{
+      #mjx-f30b5aa{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2281,9 +2281,9 @@ g[data-mml-node="xypic"] path {
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">vectorAddStride</span><span class="params">(<span class="type">const</span> <span class="type">float</span>* A, <span class="type">const</span> <span class="type">float</span>* B,</span></span></span><br><span class="line"><span class="params"><span class="function">                                <span class="type">float</span>* C, <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> idx = blockIdx.x * blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="type">int</span> stride = blockDim.x * gridDim.x;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = idx; i &lt; N; i += stride) &#123;</span><br><span class="line">        C[i] = A[i] + B[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当前代码使用 <code>&lt;&lt;&lt;128, 256&gt;&gt;&gt;</code>，总线程数为：</p>
 
-    <span id="mjx-fdd6f6b">
+    <span id="mjx-46dd0fd">
       <style>
-      #mjx-fdd6f6b{
+      #mjx-46dd0fd{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2580,10 +2580,26 @@ Related posts</h2>
     </header>
     <div class="related-paper__grid">
       
-        <a class="related-card" href="/2026/10/01/CUDA-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E-Warp%E3%80%81%E8%AE%BF%E5%AD%98%E5%88%B0-Occupancy-%E4%B8%8E%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
+        <a class="related-card" href="/2026/10/03/CUDA-Reduce-%E4%BC%98%E5%8C%96%EF%BC%9A%E4%BB%8E%E6%9C%B4%E7%B4%A0%E6%A0%91%E5%BD%A2%E8%A7%84%E7%BA%A6%E5%88%B0-Warp-Shuffle/">
           <span class="related-card__thumb">
             
 <div class="paper-thumb paper-thumb-0 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="/images/ai_infra/image4.jpg" alt="CUDA Reduce 优化：从朴素树形规约到 Warp Shuffle" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">CUDA Reduce 优化：从朴素树形规约到 Warp Shuffle</strong>
+            <em class="related-card__date">2026-10-03</em>
+          </span>
+        </a>
+      
+        <a class="related-card" href="/2026/10/01/CUDA-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E-Warp%E3%80%81%E8%AE%BF%E5%AD%98%E5%88%B0-Occupancy-%E4%B8%8E%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-1 paper-thumb--cover">
   
     <img class="paper-thumb__img" src="/images/ai_infra/image3.jpg" alt="CUDA 性能优化基础：从 Warp、访存到 Occupancy 与原子操作" loading="lazy" referrerpolicy="no-referrer">
   
